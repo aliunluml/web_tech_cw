@@ -15,10 +15,10 @@ h1, h2, h3, h4, h5, p{
 }
 
 #heading{
-	height:	40%;
+	height:	100%;
 	width:	100%;
 	position: relative;
-	top: 35%;
+  padding: 20%;
 }
 
 h1{
