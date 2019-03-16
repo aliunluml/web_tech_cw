@@ -1,10 +1,48 @@
+h1{
+	font-family: helvetica;
+	text-align: left;
+  line-height: 1.2em;
+}
 
+p{
+	font-family: helvetica;
+	text-align: left;
+  line-height: 1em;
+}
 
 #heading_BG{
-	height:	15%;
+	height:	20%;
 	width:	100%;
   top: 0;
-  background-color: 0000ff;
-	background-repeat: no-repeat;
-	background-position: center;
+  left: 0;
+  background-color: #42d4f4;
+  vertical-align: middle;
+}
+
+
+#page_title{
+  text-align: left;
+  vertical-align: middle;
+  font-size: 1.5em;
+}
+
+#media{
+  text-align: left;
+  height:	100%;
+  width:	100%;
+  font-size: 1em;
+}
+
+
+.footer{
+	padding-top: 1.5%;
+	font-size: 0.8em;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 8%;
+	color: #000000;
+	background-color: #DDDDDD;
+	text-align: center;
+	vertical-align: middle;
 }
