@@ -1,0 +1,62 @@
+
+
+.page_header{
+  height: 10%;
+  padding: 5%;
+}
+
+h1{
+	font-size: 2em;
+	line-height: 2em;
+	font-weight: 500;
+}
+
+h2{
+	font-size: 1em;
+	line-height: 1.5em;
+	font-weight: 500;
+}
+
+.post{
+  height: 120%;
+  padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+}
+
+
+.submit{
+  height: 10%;
+  background-color: #306EFF;
+  color: white;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  border: none;
+}
+
+
+.cancel{
+  height: 10%;
+  background-color: red;
+  color: white;
+  padding-left: 1.5%;
+  padding-right: 1.5%;
+  padding-top: 0.5%;
+  padding-bottom: 0.5%;
+  border: none;
+}
+
+.footer{
+	padding-top: 1.5%;
+	font-size: 0.8em;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 8%;
+	color: #000000;
+	background-color: #DDDDDD;
+	text-align: center;
+	vertical-align: middle;
+}
