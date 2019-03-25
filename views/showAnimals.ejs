@@ -1,0 +1,8 @@
+Hello, <%= name %>, nice to meet you.
+<p>Here are the animals you like:
+<ul>
+<% animals.forEach( (animal) => { %>
+   <li> <%= animal %> </li>
+<% }); %>
+</ul>
+<a href='/public/form.html'>Back to form</a>
