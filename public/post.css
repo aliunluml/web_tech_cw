@@ -1,20 +1,23 @@
-
-
-.page_header{
-  height: 10%;
-  padding: 5%;
-}
-
 h1{
+	font-family: helvetica;
 	font-size: 2em;
-	line-height: 2em;
+	line-height: 1.5em;
 	font-weight: 500;
 }
 
 h2{
+	font-family: helvetica;
 	font-size: 1em;
 	line-height: 1.5em;
 	font-weight: 400;
+}
+
+.page_header{
+  height: 10%;
+	padding-left: 5%;
+  padding-right: 5%;
+	padding-top: 2.5%;
+  padding-bottom: 2.5%;
 }
 
 .post{
