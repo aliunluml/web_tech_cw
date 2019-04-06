@@ -1,26 +1,30 @@
-var express = require('express');
-var app = express();
+const express = require('express');
+const logger = require('morgan');
+const bodyParser = require('body-parser');
 
+// Set up the express app
+const app = express();
+
+//Set up EJS rendering
 app.set('view engine', 'ejs');
 
+// Log requests to the console.
+app.use(logger('dev'));
 
-var bodyParser = require('body-parser');
-app.use(bodyParser.urlencoded({ extended: true }));
+// Parse incoming requests data (https://github.com/expressjs/body-parser)
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: false }));
 
+// Catch all requests that comply with the todos API routes
+require('./server/routes')(app);
 
+app.use('/test', (req, res) => {
+  res.render('test.ejs',{test: "Testing"});
+});
 
-app.use('/handleForm', (req, res) => {
-	var name = req.body.username;
-	var animals = [].concat(req.body.animal);
-	// console.log(animals);
-	res.render('showAnimals.ejs', { name: name, animals: animals });
+// Setup a default catch-all route that sends back a welcome message in JSON format.
+app.get('*', (req, res) => res.status(200).send({
+  message: 'Welcome to the beginning of nothingness.',
+}));
 
-    });
-
-
-app.use('/public', express.static('public'));
-
-
-app.listen(3000,  () => {
-	console.log('Listening on port 3000');
-    });
+module.exports = app;
