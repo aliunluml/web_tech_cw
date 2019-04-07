@@ -1,0 +1,77 @@
+h1{
+	font-family: helvetica;
+	font-size: 2em;
+	line-height: 1.5em;
+	font-weight: 500;
+}
+
+h2{
+	font-family: helvetica;
+	font-size: 1em;
+	line-height: 1.5em;
+	font-weight: 400;
+}
+
+h3{
+	font-family: helvetica;
+	font-size: 1.2em;
+	line-height: 1.5em;
+	font-weight: 500;
+}
+
+p{
+	font-family: helvetica;
+	text-align: center;
+  line-height: 1em;
+}
+
+.page_header{
+  height: 10%;
+	padding-left: 5%;
+  padding-right: 5%;
+	padding-top: 2.5%;
+  padding-bottom: 2.5%;
+}
+
+.content{
+  height:	200%;
+	padding-left: 5%;
+  padding-right: 5%;
+  padding-bottom: 5%;
+	vertical-align: top;
+  font-size: 1em;
+}
+
+.one_post{
+  text-align: left;
+  height:	60%;
+  width:	100%;
+	padding-bottom: 2%;
+  font-size: 1em;
+}
+
+.profile_image{
+	width: 5%;
+	height: 5%;
+}
+
+.post_content{
+	text-align: left;
+}
+
+.footer{
+	padding-top: 1.5%;
+	font-size: 0.8em;
+	bottom: 0;
+	left: 0;
+	width: 100%;
+	height: 8%;
+	color: #000000;
+	background-color: #DDDDDD;
+	text-align: center;
+	vertical-align: middle;
+}
+
+#footer_sentence{
+	text-align: center;
+}
