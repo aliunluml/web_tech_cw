@@ -1,3 +1,29 @@
+.page_header{
+  height: 10%;
+	padding-left: 5%;
+  padding-right: 5%;
+	padding-top: 2.5%;
+  padding-bottom: 2.5%;
+	width: 60%;
+}
+
+.title_and_des{
+	width: 100%;
+}
+
+.icon_section{
+	margin-bottom: 3%;
+}
+
+.icon{
+	height:	3%;
+	width: 3%;
+	margin-left: 5%;
+	background-repeat: no-repeat;
+	background-position: center;
+	background-size: 100%;
+}
+
 h1{
 	font-family: helvetica;
 	font-size: 2em;
@@ -23,14 +49,6 @@ p{
 	font-family: helvetica;
 	text-align: center;
   line-height: 1em;
-}
-
-.page_header{
-  height: 10%;
-	padding-left: 5%;
-  padding-right: 5%;
-	padding-top: 2.5%;
-  padding-bottom: 2.5%;
 }
 
 .content{
