@@ -1,10 +1,14 @@
+.row{
+	padding-top: 2%;
+}
+
 .page_header{
   height: 10%;
-	padding-left: 5%;
+	padding-left: 10%;
   padding-right: 5%;
 	padding-top: 2.5%;
   padding-bottom: 2.5%;
-	width: 60%;
+	width: 100%;
 }
 
 .title_and_des{
@@ -12,13 +16,14 @@
 }
 
 .icon_section{
-	margin-bottom: 3%;
+	margin-left: 30%;
+	padding-top: 3%;
 }
 
 .icon{
-	height:	3%;
-	width: 3%;
-	margin-left: 5%;
+	height:	8%;
+	width: 8%;
+	margin: 5%;
 	background-repeat: no-repeat;
 	background-position: center;
 	background-size: 100%;
