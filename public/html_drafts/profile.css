@@ -1,4 +1,4 @@
-.row{
+.head_container{
 	padding-top: 2%;
 }
 
@@ -56,9 +56,16 @@ p{
   line-height: 1em;
 }
 
-.profile_image{
-	width: 5%;
-	height: 5%;
+.profile{
+	height:	60%;
+	width:	80%;
+	vertical-align: top;
+  text-align: left;
+  font-size: 1em;
+	padding-left: 5%;
+  padding-right: 5%;
+	padding-top: 3%;
+  padding-bottom: 3%;
 }
 
 .footer{
