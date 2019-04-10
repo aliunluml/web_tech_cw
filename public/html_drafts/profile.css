@@ -56,30 +56,9 @@ p{
   line-height: 1em;
 }
 
-.content{
-  height:	200%;
-	padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 5%;
-	vertical-align: top;
-  font-size: 1em;
-}
-
-.one_post{
-  text-align: left;
-  height:	60%;
-  width:	100%;
-	padding-bottom: 2%;
-  font-size: 1em;
-}
-
 .profile_image{
 	width: 5%;
 	height: 5%;
-}
-
-.post_content{
-	text-align: left;
 }
 
 .footer{
