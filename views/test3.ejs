@@ -1,0 +1,9 @@
+This is <%= test%>.
+First Form Updates Todo 2. Second Form deletes Todo 2.
+<form action='/api/todos/2/update' method='post'>
+New Title:<input name='title' value='New Title'>
+<input type='submit' value='Submit'>
+</form>
+<form action='/api/todos/2/delete' method='post'>
+<input type='submit' value='Delete'>
+</form>

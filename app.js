@@ -19,7 +19,15 @@ app.use(bodyParser.urlencoded({ extended: false }));
 require('./server/routes')(app);
 
 app.use('/test', (req, res) => {
-  res.render('test.ejs',{test: "Testing"});
+  res.render('test.ejs',{test: "Testing1"});
+});
+
+app.use('/test2', (req, res) => {
+  res.render('test2.ejs',{test: "Testing2"});
+});
+
+app.use('/test3', (req, res) => {
+  res.render('test3.ejs',{test: "Testing3"});
 });
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
