@@ -24,15 +24,39 @@ module.exports = (app) => {
      }
   }
 
+  function loginRedirect(err, req, res, next) {
+    console.log(err);
+    res.redirect('/login');
+  }
+
   app.get('/dashboard', checkLogin, (req, res) => {
     res.render('dashboard.ejs',{
+      name: req.session.user.name,
+      affiliation: req.session.user.affiliation,
+      position: req.session.user.position,
+      posts: req.session.user.posts,
     });
   });
 
-  app.use('/dashboard', checkLogin, (err, req, res, next) => {
-    console.log(err);
-    res.redirect('/login');
+  app.use('/dashboard', checkLogin, loginRedirect);
+
+  app.post('/post', checkLogin, postsController.create, (req, res, next) => {
+    res.redirect('/dashboard');
   });
+
+  app.use('/post', checkLogin, loginRedirect);
+
+  app.get('/corpus', checkLogin, usersController.list, (req, res, next) => {
+    res.render('corpus.ejs',{
+      name: req.session.user.name,
+      affiliation: req.session.user.affiliation,
+      position: req.session.user.position,
+      posts: req.session.user.posts,
+      corpusFeed: req.session.corpusFeed,
+    });
+  });
+
+  app.use('/home', checkLogin, loginRedirect);
 
   // app.get('/api/users', usersController.list);
   // app.get('/api/users/:userId',usersController.retrieve);

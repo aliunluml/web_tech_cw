@@ -1,0 +1,20 @@
+<% include ../partials/protected-page-banner %>
+
+<h3>Corpus</h3>
+
+<ul>
+  <% corpusFeed.forEach((user) => { %>
+  <li>
+    <%= user.username %><br>
+    <ol>
+      <% user.posts.forEach((post) => { %>
+      <li>
+        <%= post.content %><br>
+        Likes: <%= post.likes %><br>
+        Dislikes: <%= post.dislikes %><br>
+      </li>
+      <% }); %>
+    </ol>
+  </li>
+  <% }); %>
+<ul>

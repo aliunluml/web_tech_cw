@@ -1,0 +1,13 @@
+<form action='/logout' method='get'>
+    <input type="submit" value="Log Out" />
+</form>
+
+<%= name %>
+<%= affiliation %>
+<%= position %>
+
+<form action='/post' method='post'>
+  <label for="contentTextarea">Compose a new post:</label><br>
+  <textarea id="contentTextarea" name="content" rows="10" cols="30"></textarea><br>
+  <input type="submit" value="Post" />
+</form>

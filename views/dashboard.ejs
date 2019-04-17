@@ -1,3 +1,13 @@
-<form action='/logout' method='get'>
-    <input type="submit" value="Log Out" />
-</form>
+<% include ../partials/protected-page-banner %>
+
+<h3>Dashboard</h3>
+
+<ol>
+  <% posts.forEach((post) => { %>
+  <li>
+    <%= post.content %><br>
+    Likes: <%= post.likes %><br>
+    Dislikes: <%= post.dislikes %><br>
+  </li>
+  <% }); %>
+<ol>

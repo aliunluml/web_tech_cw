@@ -50,6 +50,10 @@ module.exports = {
           email: req.body.email,
           hash: req.body.password,
         },
+        include: [{
+          model: Post,
+          as: 'posts',
+        }],
       })
       .then(users => {
         if (users.length===0) {
@@ -64,17 +68,28 @@ module.exports = {
       })
       .catch(error => res.status(400).send(error));
   },
-  // list(req, res) {
-  //   return User
-  //     .findAll({
-  //       include: [{
-  //         model: Post,
-  //         as: 'posts',
-  //       }],
-  //     })
-  //     .then(users => res.status(200).send(users))
-  //     .catch(error => res.status(400).send(error));
-  // },
+  list(req, res, next) {
+    return User
+      .findAll({
+        include: [{
+          model: Post,
+          as: 'posts',
+        }],
+      })
+      .then(users => {
+        buffer = [];
+        users.forEach(user => {
+          var item = {
+            username: user.username,
+            posts: user.posts,
+          };
+          buffer.push(item);
+        });
+        req.session.corpusFeed = buffer;
+        next();
+      })
+      .catch(error => res.status(400).send(error));
+  },
   // retrieve(req, res) {
   //   return User
   //     .findByPk(req.params.userId, {
