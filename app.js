@@ -27,7 +27,7 @@ app.use(logger('dev'));
 //associated with that id on the serverside
 app.use(session({secret: process.env.SECRET_KEY}));
 //Default values are saveUninitialized: true, resave: true
-//Our type of usage is depreciated, thus, we have the warning. If we explicitly,
+//Our type of usage is deprecated, thus, we have the warning. If we explicitly,
 //state their default values, warning should be gone. However, I would like
 //to see the warning for now so did not change it.
 //See https://stackoverflow.com/questions/24477035/express-4-0-express-session-with-odd-warning-message
