@@ -1,15 +1,31 @@
+//Use dotenv for configuring environment variables
+require('dotenv').config()
+
 const express = require('express');
 const logger = require('morgan');
 const bodyParser = require('body-parser');
+const expressEjsLayouts = require('express-ejs-layouts');
+const helmet = require('helmet')
+var session = require('express-session');
 
-// Set up the express app
+//Set up the express app
 const app = express();
+
+//Use helmet for setting HTTP headers appropriately for security
+app.use(helmet())
 
 //Set up EJS rendering
 app.set('view engine', 'ejs');
 
-// Log requests to the console.
+//Use layout support for EJS rendering
+app.use(expressEjsLayouts);
+
+//Log requests to the console
 app.use(logger('dev'));
+
+//Use sessions to assign the requests from a client an id and to store data
+//associated with that id on the serverside
+app.use(session({secret: process.env.SECRET_KEY}));
 
 // Parse incoming requests data (https://github.com/expressjs/body-parser)
 app.use(bodyParser.json());
@@ -18,16 +34,57 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Catch all requests that comply with the todos API routes
 require('./server/routes')(app);
 
-app.use('/test', (req, res) => {
-  res.render('test.ejs',{test: "Testing1"});
+app.get('/signup', (req, res) => {
+  res.render('signup.ejs',{message: ""});
 });
 
-app.use('/test2', (req, res) => {
-  res.render('test2.ejs',{test: "Testing2"});
+app.get('/login', (req, res) => {
+  res.render('login.ejs',{});
 });
 
-app.use('/test3', (req, res) => {
-  res.render('test3.ejs',{test: "Testing3"});
+app.use('/logout', (req, res) => {
+   req.session.destroy(() => {
+      console.log("User logged out.")
+   });
+   res.redirect('/login');
+});
+
+// function checkLogin(req, res, next){
+//    if(req.session.user){
+//       next();     //If session exists, proceed to page
+//    } else {
+//       var err = new Error("Not logged in!");
+//       next(err);  //Error, trying to access unauthorized page!
+//    }
+// }
+//
+// app.get('/dashboard', checkLogin, (req, res) => {
+//   res.render('dashboard.ejs',{
+//     name : req.session.user.name,
+//     username : req.session.user.username,
+//     affiliation : req.session.user.affiliation,
+//     position: req.session.user.position,
+//     posts: req.session.user.
+//   });
+// });
+//
+// app.use('/dashboard', checkLogin, (err, req, res, next) => {
+//   console.log(err);
+//   res.redirect('/login');
+// });
+
+app.get('/privacy', (req, res) => {
+  res.render('privacy.ejs',{});
+});
+
+//document.lastModified outputs the last time the html document is rendered
+//via EJS, thus, outputting the last date of access.
+app.get('/tos', (req, res) => {
+  res.render('tos.ejs',{lastModified: {string: "15/04/2019", datetime: "2019-04-15",},});
+});
+
+app.get('/', (req, res) => {
+  res.render('index.ejs',{});
 });
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.

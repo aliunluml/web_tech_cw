@@ -1,34 +1,54 @@
-const todosController = require('../controllers').todos;
-const todoItemsController = require('../controllers').todoItems;
+const usersController = require('../controllers').users;
+const postsController = require('../controllers').posts;
 
 
 module.exports = (app) => {
-  app.get('/api', (req, res) => res.status(200).send({
-    message: 'Welcome to the Todos API!',
-  }));
+  // app.get('/api', (req, res) => res.status(200).send({
+  //   message: 'Welcome to the Todos API!',
+  // }));
 
-  app.post('/api/todos', todosController.create);
-  app.get('/api/todos', todosController.list);
-  app.get('/api/todos/:todoId',todosController.retrieve);
-  app.post('/api/todos/:todoId/update', todosController.update);
-  app.post('/api/todos/:todoId/delete', todosController.destroy);
+  app.post('/signup', usersController.eligible, usersController.create, (req, res) => {
+    res.redirect('/dashboard');
+  });
 
+  app.post('/login', usersController.match, (req, res) => {
+    res.redirect('/dashboard');
+  });
 
-  app.post('/api/todos/:todoId/items', todoItemsController.create);
+  function checkLogin(req, res, next){
+     if(req.session.user){
+        next();     //If session exists, proceed to page
+     } else {
+        var err = new Error("Not logged in!");
+        next(err);  //Error, trying to access unauthorized page!
+     }
+  }
 
-  //Yet TODO
-  // app.get('/api/todos/:todoId/items', todoItemsController.list);
-  // app.get('/api/todos/:todoId/items/:todoItemId',todoItemsController.retrieve);
+  app.get('/dashboard', checkLogin, (req, res) => {
+    res.render('dashboard.ejs',{
+    });
+  });
 
-  //These 2 have not been tested yet.
-  app.post('/api/todos/:todoId/items/:todoItemId/update', todoItemsController.update);
-  app.post('/api/todos/:todoId/items/:todoItemId/delete', todoItemsController.destroy);
+  app.use('/dashboard', checkLogin, (err, req, res, next) => {
+    console.log(err);
+    res.redirect('/login');
+  });
+
+  // app.get('/api/users', usersController.list);
+  // app.get('/api/users/:userId',usersController.retrieve);
+  // app.post('/api/users/:userId/update', usersController.update);
+  // app.post('/api/users/:userId/delete', usersController.destroy);
+  //
+  //
+  // app.post('/api/users/:userId/post', postsController.create);
+  // app.get('/api/users/:userId/posts', postsController.list);
+  // app.get('/api/users/:userId/posts/:postId', postsController.retrieve);
+  // app.post('/api/users/:userId/posts/:postId/update', postsController.update);
+  // app.post('/api/users/:userId/posts/:postId/delete', postsController.destroy);
 
   // For any other request method on todo items, we're going to return "Method Not Allowed"
-  app.all('/api/todos/:todoId/items', (req, res) =>
-    res.status(405).send({
-      message: 'Method Not Allowed',
-  }));
-};
-
+  // app.all('/api/todos/:todoId/items', (req, res) =>
+  //   res.status(405).send({
+  //     message: 'Method Not Allowed',
+  // }));
 };

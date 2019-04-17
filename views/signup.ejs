@@ -1,0 +1,35 @@
+<h3>Account Registration</h3>
+<p>Please use the form below to sign up for a new account.</p>
+<%= message %>
+<form action='/signup' method='post'>
+  <label for="usernameInput">Username (15 characters maximum):</label>
+  <input id="usernameInput" name='username' placeholder="Your account username" maxlength="15" required><br>
+
+  <label for="nameInput">Name:</label>
+  <input id="nameInput" name='name' placeholder="Your full name" required><br>
+
+  <label for="emailInput">Email:</label>
+  <input id="emailInput" type='email' name='email' placeholder="Your email address" required><br>
+
+  <label for="passwordInput">Password:</label>
+  <input id="passwordInput" type='password' name='password' placeholder="Your password" required><br>
+
+  <label for="affiliationInput">Affiliation:</label>
+  <input id="affiliationInput" name='affiliation' placeholder="University, Company, etc."><br>
+
+  <label for="titleSelect">Position:</label>
+  <select id="titleSelect" name="title">
+    <option value="" selected>Please select the one that applies you the most</option>
+    <option value="undergraduate">Undergraduate</option>
+    <option value="postgraduate">Postgraduate</option>
+    <option value="postdoc">Postdoc</option>
+    <option value="lecturer">Lecturer</option>
+    <option value="seniorLecturer">Senior Lecturer</option>
+    <option value="reader">Reader</option>
+    <option value="professor">Professor</option>
+  </select><br>
+
+  <input type="checkbox" name="consent" value="true" required> I hereby agree with the <a href="/tos" title="Go to Terms of Service">Terms of Service</a> and the <a href="/privacy" title="Go to Privacy Policy">Privacy Policy</a> of Future Academic Research and give consent to the processing of my data by Future Academic Research.<br>
+
+  <input type='submit' value='Sign Up'>
+</form>

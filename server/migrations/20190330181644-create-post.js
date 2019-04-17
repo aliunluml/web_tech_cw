@@ -1,6 +1,6 @@
 module.exports = {
   up: (queryInterface, Sequelize) =>
-    queryInterface.createTable('TodoItems', {
+    queryInterface.createTable('Posts', {
       id: {
         allowNull: false,
         autoIncrement: true,
@@ -8,12 +8,16 @@ module.exports = {
         type: Sequelize.INTEGER,
       },
       content: {
-        type: Sequelize.STRING,
+        type: Sequelize.TEXT,
         allowNull: false,
       },
-      complete: {
-        type: Sequelize.BOOLEAN,
-        defaultValue: false,
+      likes: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
+      },
+      dislikes: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0,
       },
       createdAt: {
         allowNull: false,
@@ -23,16 +27,16 @@ module.exports = {
         allowNull: false,
         type: Sequelize.DATE,
       },
-      todoId: {
+      userId: {
         type: Sequelize.INTEGER,
         onDelete: 'CASCADE',
         references: {
-          model: 'Todos',
+          model: 'Users',
           key: 'id',
-          as: 'todoId',
+          as: 'userId',
         },
       },
     }),
   down: (queryInterface /* , Sequelize */) =>
-    queryInterface.dropTable('TodoItems'),
+    queryInterface.dropTable('Posts'),
 };

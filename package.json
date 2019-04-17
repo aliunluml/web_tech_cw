@@ -1,12 +1,16 @@
 {
-  "name": "package",
+  "name": "Future Academic Research",
   "version": "1.0.0",
-  "description": "",
+  "description": "COMS32500 Web Technologies Project",
   "main": "server.js",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
     "express": "^4.16.4",
+    "express-ejs-layouts": "^2.5.0",
+    "express-session": "^1.16.1",
+    "helmet": "^3.16.0",
     "morgan": "^1.9.1",
     "sequelize": "^5.2.3",
     "sequelize-cli": "^5.4.0",
