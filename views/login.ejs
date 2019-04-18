@@ -5,9 +5,37 @@
     <link type="text/css" rel="stylesheet" href="/login.css">
 </head>
 
-<h3> Log Into Your Account </h3>
-<form action='/login' method='post'>
-  <input type='email' name='email' placeholder="Email" required><br>
-  <input type='password' name='password' placeholder="Password" required><br>
-  <input type='submit' value='Log In'>
-</form>
+<body>
+  <div class="row">
+    <div class="col-sm">
+      <div class="page_header">
+        <h1 id="page_title">
+          Future Academic Research
+        </h1>
+        <h2 id="page_description">
+          Please log in your registered account.
+        </h2>
+      </div>
+    </div>
+
+    <div class="col-sm">
+      <div class="icon_section">
+        <a>
+          <img src="128x128_logo.png" class="icon">
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <div class = "login_form">
+    <form action='/login' method='post'>
+      <input type='email' name='email' placeholder="Email" required> <br>
+      <input type='password' name='password' placeholder="Password" required> <br>
+      <input type='submit' value='Log In' class = "sumbit_button">
+    </form>
+  </div>
+
+  <div class="footer">
+      <% include ../partials/footer.ejs %>
+  </div>
+</body>
