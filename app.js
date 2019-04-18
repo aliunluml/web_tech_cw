@@ -54,6 +54,8 @@ app.use('/logout', (req, res) => {
    res.redirect('/login');
 });
 
+app.use(express.static(__dirname + '/public'));
+
 // function checkLogin(req, res, next){
 //    if(req.session.user){
 //       next();     //If session exists, proceed to page

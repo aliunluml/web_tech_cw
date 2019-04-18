@@ -4,13 +4,12 @@
   <head>
     <title> Future Academic Research </title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link type="text/css" rel="stylesheet" href="post.css">
+    <link type="text/css" rel="stylesheet" href="signup.css">
     <meta charset="UTF-8"/>
     <script src = "..\..\views\dashboard.ejs"> </script>
   </head>
 
   <body>
-
     <div class="row">
       <div class="col-sm">
         <div class="page_header">
@@ -18,21 +17,13 @@
               Future Academic Research
             </h1>
             <h2 id="page_description">
-              On this page, you can post research articles.
+              Please sign up by filling the form.
             </h2>
         </div>
       </div>
 
       <div class="col-sm">
         <div class="icon_section">
-          <a href="feed.html">
-            <img src="icon_feed.png" class="icon">
-          </a>
-
-          <a href="profile.html">
-            <img src="icon_profile.png" class="icon">
-          </a>
-
           <a>
             <img src="128x128_logo.png" class="icon">
           </a>
@@ -43,32 +34,45 @@
     <div class="post">
       <form>
         <div class="form-group">
-          <label for="exampleFormControlTextarea1"> Name </label>
+          <label for="exampleFormControlTextarea1"> Username (15 characters maximum): </label>
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="exampleFormControlInput1">Email address</label>
+          <label for="exampleFormControlTextarea1"> Name: </label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
+        </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlInput1"> Email: </label>
           <input type="email" class="form-control" id="exampleFormControlInput1" placeholder="name@example.com">
         </div>
 
         <div class="form-group">
-          <label for="exampleFormControlSelect1"> Academic Field </label>
-          <select class="form-control" id="exampleFormControlSelect1">
-            <option> - Select - </option>
-            <option> Mathematics </option>
-            <option> Computer Science </option>
-            <option> Science </option>
-            <option> Social Science </option>
-            <option> Business </option>
-            <option> Arts </option>
-          </select>
+          <label for="exampleFormControlTextarea1"> Password: </label>
+          <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
         </div>
 
         <div class="form-group">
-          <label for="exampleFormControlTextarea1"> Paper Title </label>
+          <label for="exampleFormControlTextarea1"> Affiliation: </label>
           <textarea class="form-control" id="exampleFormControlTextarea1" rows="1"></textarea>
         </div>
+
+        <div class="form-group">
+          <label for="exampleFormControlSelect1"> Position </label>
+          <select class="form-control" id="exampleFormControlSelect1">
+            <option> - Select - </option>
+            <option> Undergraduate </option>
+            <option> Postgraduate </option>
+            <option> Postdoc </option>
+            <option> Lecturer </option>
+            <option> Senior Lecturer </option>
+            <option> Reader </option>
+            <option> Professor </option>
+          </select>
+        </div>
+
+
 
         <div class="form-group">
           <label for="exampleFormControlTextarea1"> Paper Content </label>

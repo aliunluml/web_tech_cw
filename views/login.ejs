@@ -1,4 +1,11 @@
-<h3>Log Into Your Account</h3>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <% include ../partials/header.ejs %>
+    <link type="text/css" rel="stylesheet" href="/login.css">
+</head>
+
+<h3> Log Into Your Account </h3>
 <form action='/login' method='post'>
   <input type='email' name='email' placeholder="Email" required><br>
   <input type='password' name='password' placeholder="Password" required><br>

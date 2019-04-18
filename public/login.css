@@ -43,6 +43,13 @@ h2{
 	font-weight: 400;
 }
 
+h3{
+	font-family: helvetica;
+	font-size: 5em;
+	line-height: 1.5em;
+	font-weight: 400;
+}
+
 .post{
   height: 120%;
   padding-left: 5%;
