@@ -13,7 +13,7 @@ body{
 }
 
 .icon_section{
-	margin-left: 30%;
+	margin-left: 10%;
 	padding-top: 3%;
 }
 
@@ -81,6 +81,7 @@ h2{
   padding-right: 1.5%;
   padding-top: 0.5%;
   padding-bottom: 0.5%;
+	margin-left: 1%;
   border: none;
 }
 
