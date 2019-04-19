@@ -1,16 +1,22 @@
-<form action='/logout' method='get'>
-    <input type="submit" value="Log Out" />
-</form><br>
+<div class = "main_section">
 
-<%= name %>
-<%= affiliation %>
-<%= position %><br>
+  <div class = "form_class" >
+    <form action='/post' method='post'>
+      <div class="form-group">
+        <label for="contentTextarea"> Compose a new post: </label> <br>
+        <textarea id="contentTextarea" name="content" rows="14" cols="140"> </textarea><br>
+      </div>
 
-<form action='/post' method='post'>
-  <label for="contentTextarea">Compose a new post:</label><br>
-  <textarea id="contentTextarea" name="content" rows="10" cols="30"></textarea><br>
-  <input type="submit" value="Post" />
-</form><br>
+      <div class="form-group">
+        <input type="submit" value="Post" />
+      </div>
+    </form>
+  </div>
 
-<a href="/corpus" title="Go to Corpus">Corpus</a><br>
-<a href="/dashboard" title="Go to Dashboard">Dashboard</a>
+
+  <div class = "form_class" >
+    <form action='/logout' method='get'>
+        <input type="submit" value="Log Out" />
+    </form>
+  </div>
+</div>
