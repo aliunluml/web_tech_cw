@@ -1,25 +1,33 @@
 <div class = "main_section">
+
+  <h2 class="page_description">
+    Please log into your registered account.
+  </h2>
+
   <div class = "form_class">
     <form action='/login' method='post'>
 
-      
       <div class="form-group">
-        <input type='email' name='email' placeholder="Email" required> <br>
+        <label>
+          Registered email address:
+        </label>
+        <input type='email' name='email' placeholder="" class="form-control" required>
       </div>
 
-
-
       <div class="form-group">
-        <input type='password' name='password' placeholder="Password" required> <br>
+        <label>
+          Password:
+        </label>
+        <input type='password' name='password' placeholder="" class="form-control" required>
       </div>
-
-
-
 
       <div class="form-group">
         <input type='submit' value='Log In' class = "sumbit_button">
       </div>
 
     </form>
+  </div>
+
+  <div class = "blank">
   </div>
 </div>
