@@ -3,7 +3,7 @@
 }
 
 .page_title{
-	margin: 6.5%;
+	margin: 6.2%;
 	margin-left: 10%;
 }
 
@@ -30,17 +30,14 @@ h1{
 
 h2{
 	font-family: helvetica;
-	font-size: 1em;
+	font-size: 1.2em;
 	line-height: 1.5em;
 	font-weight: 400;
 }
 
-.login_form{
-  height: 50%;
-	line-height: 1.5em;
-  padding-left: 5%;
-  padding-right: 5%;
-  padding-bottom: 5%;
+.main_section{
+	margin-left: 5%;
+	margin-bottom: 5%;
 }
 
 .sumbit_button{
