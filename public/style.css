@@ -13,7 +13,7 @@ body{
 }
 
 .icon_section{
-	margin-left: 10%;
+	margin-left: 20%;
 	padding-top: 3%;
 }
 
@@ -27,17 +27,35 @@ body{
 }
 
 h1{
-	font-family: helvetica;
-	font-size: 2em;
-	line-height: 1.5em;
+	font-size: 2.2em;
+	line-height: 2em;
 	font-weight: 500;
 }
 
 h2{
-	font-family: helvetica;
 	font-size: 1.2em;
 	line-height: 1.5em;
 	font-weight: 400;
+}
+
+h3{
+	font-size: 1em;
+	line-height: 1.5em;
+	font-weight: 500;
+}
+
+h4{
+	font-size: 1.6em;
+	font-weight: 500;
+}
+
+h5{
+	font-size: 1.2em;
+	font-weight: 500;
+}
+
+p{
+	font-size: 1em;
 }
 
 .main_section{
