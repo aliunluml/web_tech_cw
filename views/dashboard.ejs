@@ -1,15 +1,8 @@
-<hr>
-<% include ../partials/protected-page-banner %>
-<hr>
+<div class = "main_section">
 
-<h3>Dashboard</h3>
+  <h2 class="page_description">
+    You can compose and post a new research article here.
+  </h2>
+  <% include ../partials/protected-page-banner %>
 
-<ol>
-  <% posts.forEach((post) => { %>
-  <li>
-    <%= post.content %><br>
-    Likes: <%= post.likes %><br>
-    Dislikes: <%= post.dislikes %><br>
-  </li>
-  <% }); %>
-<ol>
+</div>

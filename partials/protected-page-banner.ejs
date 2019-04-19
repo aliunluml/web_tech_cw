@@ -1,22 +1,19 @@
-<div class = "main_section">
+<div class = "form_class" >
+  <form action='/post' method='post'>
+    <div class="form-group">
+      <label for="contentTextarea"> </label> <br>
+      <textarea id="contentTextarea" name="content" rows="14" cols="140"> </textarea><br>
+    </div>
+    <div class="form-group">
+      <input type="submit" value="Post" />
+    </div>
+  </form>
+</div>
 
-  <div class = "form_class" >
-    <form action='/post' method='post'>
-      <div class="form-group">
-        <label for="contentTextarea"> Compose a new post: </label> <br>
-        <textarea id="contentTextarea" name="content" rows="14" cols="140"> </textarea><br>
-      </div>
-
-      <div class="form-group">
-        <input type="submit" value="Post" />
-      </div>
-    </form>
-  </div>
-
-
-  <div class = "form_class" >
+<div class = "form_class" >
+  <div class="form-group">
     <form action='/logout' method='get'>
-        <input type="submit" value="Log Out" />
+      <input type="submit" value="Log Out" />
     </form>
   </div>
 </div>
