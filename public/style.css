@@ -63,6 +63,11 @@ p{
 	margin-bottom: 5%;
 }
 
+.justify_alignment{
+	width: 95%;
+	text-align: justify;
+}
+
 .page_description{
 	margin-bottom: 3%;
 }
