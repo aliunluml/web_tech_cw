@@ -17,10 +17,11 @@ module.exports = (app) => {
 
   function checkLogin(req, res, next){
      if(req.session.user){
-        next();     //If session exists, proceed to page
-     } else {
-        var err = new Error("Not logged in!");
-        next(err);  //Error, trying to access unauthorized page!
+       next();     //If session exists, proceed to page
+     }
+     else{
+       var err = new Error("Not logged in!");
+       next(err);  //Error, trying to access unauthorized page!
      }
   }
 
@@ -37,14 +38,18 @@ module.exports = (app) => {
       posts: req.session.user.posts,
     });
   });
-
   app.use('/dashboard', checkLogin, loginRedirect);
+
+
+
 
   app.post('/post', checkLogin, postsController.create, (req, res, next) => {
     res.redirect('/dashboard');
   });
-
   app.use('/post', checkLogin, loginRedirect);
+
+
+
 
   app.get('/corpus', checkLogin, usersController.list, (req, res, next) => {
     res.render('corpus.ejs',{
@@ -55,6 +60,23 @@ module.exports = (app) => {
       corpusFeed: req.session.corpusFeed,
     });
   });
+  app.use('/corpus', checkLogin, loginRedirect);
+
+
+
+
+  app.get('/profile', checkLogin, (req, res) => {
+    res.render('profile.ejs',{
+      name: req.session.user.name,
+      affiliation: req.session.user.affiliation,
+      position: req.session.user.position,
+      posts: req.session.user.posts,
+    });
+  });
+  app.use('/profile', checkLogin, loginRedirect);
+
+
+
 
   app.use('/home', checkLogin, loginRedirect);
 
