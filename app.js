@@ -64,7 +64,7 @@ app.use(express.static(__dirname + '/public'));
 //       next(err);  //Error, trying to access unauthorized page!
 //    }
 // }
-//
+
 // app.get('/dashboard', checkLogin, (req, res) => {
 //   res.render('dashboard.ejs',{
 //     name : req.session.user.name,
@@ -95,8 +95,8 @@ app.get('/', (req, res) => {
 });
 
 // Setup a default catch-all route that sends back a welcome message in JSON format.
-app.get('*', (req, res) => res.status(200).send({
-  message: 'Welcome to the beginning of nothingness.',
-}));
+app.get('*', (req, res) => {
+  res.render('error.ejs',{});
+});
 
 module.exports = app;
