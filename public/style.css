@@ -81,8 +81,12 @@ p{
 	width: 20%;
 }
 
-.added_spacing{
+.add_space_below{
 	margin-bottom: 2%;
+}
+
+.add_more_space_below{
+	margin-bottom: 12%;
 }
 
 .blank{
