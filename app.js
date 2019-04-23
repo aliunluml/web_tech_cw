@@ -94,6 +94,14 @@ app.get('/', (req, res) => {
   res.render('index.ejs',{});
 });
 
+app.get('/profile', (req, res) => {
+  res.render('profile.ejs',{});
+});
+
+app.get('/corpus', (req, res) => {
+  res.render('corpus.ejs',{});
+});
+
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => {
   res.render('error.ejs',{});
