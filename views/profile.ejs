@@ -4,6 +4,24 @@
     You can view your registered information and a list of your posts here.
   </h2>
 
+  <div >
+    <ul>
+      <% corpusFeed.forEach((user) => { %>
+      <li>
+        <%= user.username %><br>
+        <ol>
+          <% user.posts.forEach((post) => { %>
+          <li>
+            <%= post.content %><br>
+            Likes: <%= post.likes %><br>
+            Dislikes: <%= post.dislikes %><br>
+          </li>
+          <% }); %>
+        </ol>
+      </li>
+      <% }); %>
+    <ul>
+  </div>
 
   <div class = "form_class" >
     <div class="form-group">

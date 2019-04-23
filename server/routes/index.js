@@ -71,6 +71,7 @@ module.exports = (app) => {
       affiliation: req.session.user.affiliation,
       position: req.session.user.position,
       posts: req.session.user.posts,
+      corpusFeed: req.session.corpusFeed,
     });
   });
   app.use('/profile', checkLogin, loginRedirect);
