@@ -81,7 +81,7 @@ app.use(express.static(__dirname + '/public'));
 // });
 
 app.get('/privacy', (req, res) => {
-  res.render('privacy.ejs',{});
+  res.render('privacy.ejs',{lastModified: {string: "21/05/2019", datetime: "2019-05-21",},});
 });
 
 //document.lastModified outputs the last time the html document is rendered
