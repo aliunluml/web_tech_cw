@@ -87,7 +87,7 @@ app.get('/privacy', (req, res) => {
 //document.lastModified outputs the last time the html document is rendered
 //via EJS, thus, outputting the last date of access.
 app.get('/tos', (req, res) => {
-  res.render('tos.ejs',{lastModified: {string: "15/04/2019", datetime: "2019-04-15",},});
+  res.render('tos.ejs',{lastModified: {string: "21/05/2019", datetime: "2019-05-21",},});
 });
 
 app.get('/', (req, res) => {
