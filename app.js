@@ -39,10 +39,6 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Catch all requests that comply with the todos API routes
 require('./server/routes')(app);
 
-// app.get('/signup', (req, res) => {
-//   res.render('signup.ejs',{message: ""});
-// });
-
 
 app.use('/logout', (req, res) => {
    req.session.destroy(() => {
