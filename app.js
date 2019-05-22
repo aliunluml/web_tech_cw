@@ -39,13 +39,10 @@ app.use(bodyParser.urlencoded({ extended: false }));
 // Catch all requests that comply with the todos API routes
 require('./server/routes')(app);
 
-app.get('/signup', (req, res) => {
-  res.render('signup.ejs',{message: ""});
-});
+// app.get('/signup', (req, res) => {
+//   res.render('signup.ejs',{message: ""});
+// });
 
-app.get('/login', (req, res) => {
-  res.render('login.ejs',{});
-});
 
 app.use('/logout', (req, res) => {
    req.session.destroy(() => {
@@ -56,29 +53,6 @@ app.use('/logout', (req, res) => {
 
 app.use(express.static(__dirname + '/public'));
 
-// function checkLogin(req, res, next){
-//    if(req.session.user){
-//       next();     //If session exists, proceed to page
-//    } else {
-//       var err = new Error("Not logged in!");
-//       next(err);  //Error, trying to access unauthorized page!
-//    }
-// }
-
-// app.get('/dashboard', checkLogin, (req, res) => {
-//   res.render('dashboard.ejs',{
-//     name : req.session.user.name,
-//     username : req.session.user.username,
-//     affiliation : req.session.user.affiliation,
-//     position: req.session.user.position,
-//     posts: req.session.user.
-//   });
-// });
-//
-// app.use('/dashboard', checkLogin, (err, req, res, next) => {
-//   console.log(err);
-//   res.redirect('/login');
-// });
 
 app.get('/privacy', (req, res) => {
   res.render('privacy.ejs',{lastModified: {string: "21/05/2019", datetime: "2019-05-21",},});
@@ -94,17 +68,10 @@ app.get('/', (req, res) => {
   res.render('index.ejs',{});
 });
 
-app.get('/profile', (req, res) => {
-  res.render('profile.ejs',{});
-});
-
-app.get('/corpus', (req, res) => {
-  res.render('corpus.ejs',{});
-});
-
 // Setup a default catch-all route that sends back a welcome message in JSON format.
 app.get('*', (req, res) => {
-  res.render('error.ejs',{});
+  res.status(404);
+  res.render('error.ejs',{errorMessage: "404 Not found"});
 });
 
 module.exports = app;

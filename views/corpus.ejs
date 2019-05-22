@@ -4,6 +4,8 @@
     You can view all posted research articles here.
   </h2>
 
+  <% include ../partials/protected-page-banner %>
+
   <div>
     <ul>
       <% corpusFeed.forEach((user) => { %>
@@ -23,11 +25,4 @@
     <ul>
   </div>
 
-  <div class = "form_class" >
-    <div class="form-group">
-      <form action='/logout' method='get'>
-        <input type="submit" value="Log Out" class = "sumbit_button" />
-      </form>
-    </div>
-  </div>
 </div>

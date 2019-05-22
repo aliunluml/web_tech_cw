@@ -1,15 +1,25 @@
 <div class = "main_section">
 
-  <h2 class="page_description">
-    You can compose and post a new research article here.
-  </h2>
   <% include ../partials/protected-page-banner %>
 
+  <h2 class="page_description">
+    Dashboard
+  </h2>
+
+  <p>You can compose and post a new research article here.</p>
+
   <div class = "form_class" >
-    <div class="form-group">
-      <form action='/logout' method='get'>
-        <input type="submit" value="Log Out" class = "sumbit_button" />
-      </form>
-    </div>
+    <form action='/post' method='post'>
+      <div class="form-group">
+        <label for="contentTextarea"> </label> <br>
+        <textarea id="contentTextarea" name="content" rows="14" cols="140"> </textarea><br>
+      </div>
+
+      <div class="form-group">
+        <input type="submit" value="Post" class = "sumbit_button"/>
+      </div>
+
+    </form>
   </div>
+
 </div>
