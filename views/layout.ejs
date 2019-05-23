@@ -12,6 +12,10 @@
       <% include ../partials/header %>
     </header>
 
+    <% if(logged==="true"){ %>
+      <% include ../partials/protected-page-banner %>
+    <% } %>
+
     <main>
       <%- body %>
     </main>
