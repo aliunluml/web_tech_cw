@@ -20,7 +20,6 @@ module.exports = {
         title: req.body.title,
       })
       .then(user => {
-        req.session.user = user;
         next();
       })
       .catch(error => res.status(400).send(error));

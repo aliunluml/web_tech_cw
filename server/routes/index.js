@@ -44,10 +44,13 @@ module.exports = (app) => {
 
   app.use('/signup', checkLogin, (req, res) => {
     res.redirect('/dashboard');
-  })
+  });
 
   app.use('/signup', checkLogin, continueWithNoLogin, usersController.eligible, usersController.create, (req, res) => {
-    res.redirect('/dashboard');
+// Default redirect is 302. We need 307 to preserve the POST request & req.body
+// 308 is Permanent redirect and the browser may in the future directly bypass,
+// not what we want. See the table at https://tools.ietf.org/html/rfc7538
+    res.redirect(307,'/login');
   });
 
 
