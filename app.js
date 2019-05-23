@@ -88,7 +88,7 @@ function continueWithNoLogin(err, req, res, next) {
         logged:"false",
       });
     }
-    // Bad requests with GET
+    // Requests with GET
     else {
       res.status(404);
       res.render('error.ejs',{
@@ -102,7 +102,7 @@ function continueWithNoLogin(err, req, res, next) {
       console.log("Proceeding");
       next();
     }
-    // Bad requests with POST
+    // Requests with POST
     else{
       res.status(404);
       res.render('error.ejs',{
@@ -111,7 +111,7 @@ function continueWithNoLogin(err, req, res, next) {
       });
     }
   }
-  // Bad requests with DELETE, PUT, etc.
+  // Requests with DELETE, PUT, etc.
   else {
     res.status(404);
     res.render('error.ejs',{
