@@ -1,29 +1,33 @@
 <div class = "main_section">
-  
+
   <h2 class="page_description">
     My Profile
   </h2>
 
   <p>You can view your registered information and a list of your posts here.</p>
 
-  <div>
-    <ul>
-      <% corpusFeed.forEach((user) => { %>
+  <h3>My Account Information</h3>
+
+  <section>
+    Name: <%= name %><br>
+    Username: <%= username %><br>
+    Affiliation: <%= affiliation %><br>
+    Position: <%= position %><br>
+  </section>
+
+  <h3>My Posts</h3>
+
+  <section>
+    <ol>
+      <% posts.forEach(post => { %>
       <li>
-        <%= user.username %><br>
-        <ol>
-          <% user.posts.forEach((post) => { %>
-          <li>
-            <%= post.content %><br>
-            Likes: <%= post.likes %><br>
-            Dislikes: <%= post.dislikes %><br>
-          </li>
-          <% }); %>
-        </ol>
+        <article><%= post.content %></article><br>
+        Likes: <%= post.likes %><br>
+        Dislikes: <%= post.dislikes %><br>
       </li>
       <% }); %>
-    <ul>
-  </div>
+    </ol>
+  </section>
 
 
 </div>

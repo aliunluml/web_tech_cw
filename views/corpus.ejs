@@ -1,8 +1,10 @@
 <div class = "main_section">
 
   <h2 class="page_description">
-    You can view all posted research articles here.
+    Corpus
   </h2>
+
+  <p>You can view all posted research articles here.</p>
 
   <div>
     <ul>
@@ -12,7 +14,7 @@
         <ol>
           <% user.posts.forEach((post) => { %>
           <li>
-            <%= post.content %><br>
+            <article><%= post.content %></article><br>
             Likes: <%= post.likes %><br>
             Dislikes: <%= post.dislikes %><br>
           </li>

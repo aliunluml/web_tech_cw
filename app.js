@@ -67,8 +67,9 @@ function continueWithNoLogin(err, req, res, next) {
     }
     else if(req.originalUrl==='/signup') {
       res.render('signup.ejs',{
+        invalidEmail:"false",
+        invalidUsername:"false",
         logged:"false",
-        message: ""
       });
     }
     else if (req.originalUrl==='/privacy') {
@@ -137,6 +138,7 @@ app.use('/logout', checkLogin, loginRedirect);
 
 app.get('/privacy', checkLogin, (req, res) => {
   res.render('privacy.ejs',{
+    username: req.session.user.username,
     logged:"true",
     lastModified: {string: "21/05/2019", datetime: "2019-05-21",},
   });
@@ -148,6 +150,7 @@ app.use('/privacy', checkLogin, continueWithNoLogin);
 //via EJS, thus, outputting the last date of access.
 app.get('/tos', checkLogin, (req, res) => {
   res.render('tos.ejs',{
+    username: req.session.user.username,
     logged:"true",
     lastModified: {string: "21/05/2019", datetime: "2019-05-21",},
   });
@@ -156,7 +159,10 @@ app.use('/tos', checkLogin, continueWithNoLogin);
 
 
 app.get('/', checkLogin, (req, res) => {
-  res.render('index.ejs',{logged:"true",});
+  res.render('index.ejs',{
+    username: req.session.user.username,
+    logged:"true",
+  });
 });
 app.use('/', checkLogin, continueWithNoLogin);
 
@@ -165,6 +171,7 @@ app.use('/', checkLogin, continueWithNoLogin);
 app.use('*', checkLogin, (req, res) => {
   res.status(404);
   res.render('error.ejs',{
+    username: req.session.user.username,
     logged:"true",
     errorMessage: "404 Not found"
   });

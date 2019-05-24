@@ -1,5 +1,3 @@
-<link type="text/css" rel="stylesheet" href="index.css">
-
 <div id="heading_BG">
   <div id="heading">
 
@@ -7,17 +5,20 @@
       Future Academic Research
     </h1>
 
-    <h2 id="subtitle" class="center_alignment">
+    <p id="subtitle" class="center_alignment">
       Research, Educate and Share
-    </h2>
+    </p>
 
-    <h3 id="signup" class="center_alignment">
-      <a href="/signup" title="Sign up for a new account">Sign Up</a>
-    </h3>
+    <% if(logged==="false"){ %>
+      <h3 id="signup" class="center_alignment">
+        <a href="/signup" title="Sign up for a new account">Sign Up</a>
+      </h3>
 
-    <h3 id="login" class="center_alignment">
-      <a href="/login" title="Log into your account">Log In</a><br>
-    </h3>
+      <h3 id="login" class="center_alignment">
+        <a href="/login" title="Log into your account">Log In</a><br>
+      </h3>
+    <% } %>
+
 
   </div>
 </div>

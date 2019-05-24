@@ -31,10 +31,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   app.get('/dashboard', checkLogin, (req, res) => {
     res.render('dashboard.ejs',{
+      username: req.session.user.username,
       logged:"true",
-      name: req.session.user.name,
-      affiliation: req.session.user.affiliation,
-      position: req.session.user.position,
       posts: req.session.user.posts,
     });
   });
@@ -49,11 +47,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   app.get('/corpus', checkLogin, usersController.list, (req, res, next) => {
     res.render('corpus.ejs',{
+      username: req.session.user.username,
       logged:"true",
-      name: req.session.user.name,
-      affiliation: req.session.user.affiliation,
-      position: req.session.user.position,
-      posts: req.session.user.posts,
       corpusFeed: req.session.corpusFeed,
     });
   });
@@ -62,12 +57,12 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   app.get('/profile', checkLogin, (req, res) => {
     res.render('profile.ejs',{
+      username: req.session.user.username,
       logged:"true",
       name: req.session.user.name,
-      affiliation: req.session.user.affiliation,
-      position: req.session.user.position,
+      affiliation: req.session.user.affiliation || "Not given",
+      position: req.session.user.position || "Not given",
       posts: req.session.user.posts,
-      corpusFeed: req.session.corpusFeed,
     });
   });
   app.use('/profile', checkLogin, loginRedirect);

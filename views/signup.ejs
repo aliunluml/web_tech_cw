@@ -1,11 +1,23 @@
 <div class = "main_section">
 
+  <% if(invalidUsername==="true"){ %>
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Username Unavailable: </strong> Please choose another one.
+    </div>
+  <% } %>
+  <% if(invalidEmail==="true"){ %>
+    <div class="alert">
+      <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+      <strong>Email Unavailable: </strong> Please choose another one to sign up for a new account or log in to your account.
+    </div>
+  <% } %>
+
   <h2 class="page_description">
     Please fill out the following form to register.
   </h2>
 
   <div class = "form_class">
-    <%= message %>
     <form action='/signup' method='post'>
 
       <div class="form-group">

@@ -39,7 +39,27 @@ module.exports = {
           //No feedback is given to the user at the moment.
           //There is also no differentiation between email & username checks
           //We may split this eligible() as emailCheck() & usernameCheck()
-          return res.redirect('/signup');
+          invalidUsername = false;
+          invalidEmail = false;
+          for (var i = 0; i < users.length; i++) {
+            if (users[i].username===req.body.username) {
+              invalidUsername = true;
+            }
+            if (users[i].email===req.body.email) {
+              invalidEmail = true;
+            }
+            if (invalidUsername && invalidEmail) {
+              break;
+            }
+          }
+
+          return res.render('signup.ejs',{
+            invalidEmail: invalidEmail.toString(),
+            invalidUsername: invalidUsername.toString(),
+            logged:"false",
+          });
+
+          // return res.redirect('/signup');
         }
       })
       .catch(error => res.status(400).send(error));
