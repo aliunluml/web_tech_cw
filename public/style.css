@@ -7,10 +7,6 @@ textarea {
 	height: 100%;
 }
 
-.row{
-	padding-top: 2%;
-}
-
 .icon{
 	height:	10%;
 	width: 10%;
@@ -28,21 +24,6 @@ textarea {
 	margin-bottom: 3%;
 }
 
-.form_class{
-	width: 90%;
-}
-
-.add_space_below{
-	margin-bottom: 2%;
-}
-
-.add_more_space_below{
-	margin-bottom: 12%;
-}
-
-.blank{
-	padding: 5%;
-}
 
 .sumbit_button{
   height: 10%;

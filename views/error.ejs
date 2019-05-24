@@ -7,44 +7,35 @@
   <p class="page_description">Please choose one of the following actions:</p>
 
   <ul>
+    <% if(logged==="false"){ %>
+
     <li>
-      <div class = "add_space_below">
+      <p>
           If you do not have an account, please
           <a href="/signup" title="Sign up for a new account">
             sign up
           </a>
-      </div>
+      </p>
     </li>
-
     <li>
-      <div class = "add_space_below">
+      <p>
           If you have an account but have not logged in, please
           <a href="/login" title="Log into your account">
             login in
           </a>
-      </div>
+      </p>
     </li>
+
+    <% } else { %>
 
     <li>
-      <div class = "add_space_below">
-          If you have logged in, you can use the navigation bar
-          on the top right corner of the page to go to other pages,
-          or alternatively sign out using the following button:
-      </div>
-
-      <div class = "add_space_below">
-        <div class = "form_class" >
-          <div class="form-group">
-            <form action='/logout' method='get'>
-              <input type="submit" value="Log Out" class = "sumbit_button" />
-            </form>
-          </div>
-        </div>
-      </div>
+      <p>
+          You can use the navigation bar to visit other pages
+          or to alternatively sign out.
+      </p>
     </li>
+
+    <% } %>
   </ul>
 
-
-  <div class = "blank">
-  </div>
 </div>
