@@ -1,22 +1,24 @@
 <p> Logged in as <%= username %> </p>
 
-<div class="icon_section">
-  <a href="/">
-    <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
-      <defs>
-        <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
-          <stop offset="0%" style="stop-color:rgb(0, 0, 0); stop-opacity:1" />
-          <stop offset="100%" style="stop-color:rgb(150, 150, 150); stop-opacity:1" />
-        </linearGradient>
-      </defs>
-      <path d=" M 10 20 l 0 35 l 40 0 l 0 -35 l -40 0 " fill="transparent" stroke="black"/>
-      <path d=" M 15 55 l 0 -20 l 15 0 l 0 20 l -15 0 " fill="url(#gradient)"/>      # the door of the home
-      <path d=" M 30 0 l -30 20 l 60 0 l -30 -20 " fill="url(#gradient)"/>           # the rooftop of the home
-      Sorry, your browser does not support inline SVG.
-    </svg>
-    Home
-  </a>
-
+<div class="row">
+  <div class="col-md">
+    <a href="/">
+      <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:rgb(0, 0, 0); stop-opacity:1" />
+            <stop offset="100%" style="stop-color:rgb(150, 150, 150); stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <path d=" M 10 20 l 0 35 l 40 0 l 0 -35 l -40 0 " fill="transparent" stroke="black"/>
+        <path d=" M 15 55 l 0 -20 l 15 0 l 0 20 l -15 0 " fill="url(#gradient)"/>      # the door of the home
+        <path d=" M 30 0 l -30 20 l 60 0 l -30 -20 " fill="url(#gradient)"/>           # the rooftop of the home
+        Sorry, your browser does not support inline SVG.
+      </svg>
+      <strong>Home</strong>
+    </a>
+  </div>
+  <div class="col-md">
   <a href="/dashboard" title="Go to Dashboard">
     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -32,9 +34,10 @@
       <path d=" M 45 0 l 15 15 l -5 5 l -15 -15 l 5 -5 " fill="url(#gradient)"/>  # the eraser on the other end
       Sorry, your browser does not support inline SVG.
     </svg>
-    Dashboard
+    <strong>Dashboard</strong>
   </a>
-
+  </div>
+  <div class="col-md">
   <a href="/corpus" title="Go to Corpus">
     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -51,9 +54,10 @@
       <path d=" M 5 0 l 50 0 l 0 10 l -50 0 l 0 -10 " fill="url(#gradient)"/>
       Sorry, your browser does not support inline SVG.
     </svg>
-    Corpus
+    <strong>Corpus</strong>
   </a>
-
+  </div>
+  <div class="col-md">
   <a href="/profile" title="Go to Profile">
     <svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
       <defs>
@@ -66,8 +70,9 @@
       <circle cx="30" cy="60" r="30" fill="transparent" stroke="black"/>    # body
       Sorry, your browser does not support inline SVG.
     </svg>
-    My Profile
+    <strong>My Profile</strong>
   </a>
+  </div>
 </div>
 
 

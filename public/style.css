@@ -11,15 +11,6 @@ textarea {
 	padding-top: 2%;
 }
 
-.page_title{
-	margin-left: 5%;
-	display: inline;
-}
-
-.icon_section{
-	margin-left: 10%;
-}
-
 .icon{
 	height:	10%;
 	width: 10%;
@@ -30,13 +21,7 @@ textarea {
 }
 
 .main_section{
-	margin-left: 5%;
-	margin-bottom: 5%;
-}
-
-.justify_alignment{
-	width: 95%;
-	text-align: justify;
+	margin: 5%;
 }
 
 .page_description{
@@ -45,11 +30,6 @@ textarea {
 
 .form_class{
 	width: 90%;
-}
-
-.contentTextarea{
-	width: 500%;
-	width: 20%;
 }
 
 .add_space_below{
