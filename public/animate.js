@@ -8,5 +8,13 @@ document.addEventListener('DOMContentLoaded', () => {
       setTimeout(function(){ div.style.display = "none"; }, 600);
     };
   }
-  
+
+  var protectedbtns = document.getElementsByClassName("protectedbtn");
+  for (var i = 0; i < protectedbtns.length; i++) {
+    protectedbtns[i].onclick = function(){
+      this.style.borderStyle = "inset";
+      window.location.href = this.dataset.href;
+    };
+  }
+
 });
