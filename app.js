@@ -62,6 +62,7 @@ function continueWithNoLogin(err, req, res, next) {
     console.log("Rendering");
     if (req.originalUrl==='/login') {
       res.render('login.ejs',{
+        noMatch:"false",
         logged:"false",
       });
     }

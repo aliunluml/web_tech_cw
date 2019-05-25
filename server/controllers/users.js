@@ -79,7 +79,10 @@ module.exports = {
       .then(users => {
         if (users.length===0) {
           //No feedback is given to the user at the moment.
-          return res.redirect('/login');
+          return res.render('login.ejs',{
+            noMatch:"true",
+            logged:"false",
+          });
         }
         else {
           //findAll() outputs an array.

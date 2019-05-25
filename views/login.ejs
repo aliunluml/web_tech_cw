@@ -4,6 +4,13 @@
     Login
   </h2>
 
+  <% if(noMatch==="true"){ %>
+    <div class="alert">
+      <span class="closebtn">&times;</span>
+      <strong>Login Failed: </strong> Please make sure you provide the correct email and password.
+    </div>
+  <% } %>
+
   <p class="page_description">Please login to your registered account.</p>
 
   <form action='/login' method='post'>
