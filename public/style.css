@@ -7,6 +7,18 @@ textarea {
 	height: 100%;
 }
 
+.inside_banner{
+	margin-left: 5%;
+	margin-right: 5%;
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
+.account_info{
+	margin-top: 2%;
+	margin-bottom: 2%;
+}
+
 .icon{
 	height:	10%;
 	width: 10%;
