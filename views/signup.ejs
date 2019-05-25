@@ -24,8 +24,9 @@
   <form action='/signup' method='post'>
 
     <div class="form-group">
-      <label for="usernameInput"> Username (15 characters maximum): </label>
-      <input id="usernameInput" class="form-control" name='username' placeholder="Your account username" maxlength="15" required>
+      <label for="usernameInput"> Username: </label>
+      <input id="usernameInput" class="form-control" name='username' aria-describedby="usernameHelp" placeholder="Your account username" maxlength="15" required>
+      <small id="usernameHelp" class="form-text text-muted">15 characters maximum</small>
     </div>
 
     <div class="form-group">

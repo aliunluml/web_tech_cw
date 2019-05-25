@@ -7,16 +7,39 @@ textarea {
 	height: 100%;
 }
 
-.inside_banner{
-	margin-left: 5%;
-	margin-right: 5%;
-	margin-top: 2%;
-	margin-bottom: 2%;
+.container{
+  text-align: center;
 }
 
-.account_info{
-	margin-top: 2%;
-	margin-bottom: 2%;
+.col-12{
+  padding: 15px;
+}
+
+.col-md{
+  padding: 15px;
+}
+
+.protected_banner label{
+  font-style: italic;
+	margin-right: 5%;
+}
+
+.protected_banner .col-12{
+    background-color: rgb(248, 249, 250);
+    background-image: repeating-linear-gradient(45deg, transparent, transparent 5px,  #DDDDDD 5px,  #DDDDDD 10px);
+}
+
+.protected_banner .form-group{
+  margin: 0;
+}
+
+.protected_banner .col-md{
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-right: 25px;
+  padding-left: 25px;
+  /* border-color: #DDDDDD; */
+  border-style: groove;
 }
 
 .icon{
