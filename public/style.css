@@ -39,7 +39,7 @@ textarea {
   padding-right: 25px;
   padding-left: 25px;
   /* border-color: #DDDDDD; */
-  border-style: groove;
+  border-style: outset;
 }
 
 .icon{
