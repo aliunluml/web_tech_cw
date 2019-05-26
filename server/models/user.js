@@ -1,3 +1,5 @@
+const bcrypt = require('bcrypt');
+
 module.exports = (sequelize, DataTypes) => {
   const User = sequelize.define('User', {
     username: {
@@ -30,7 +32,18 @@ module.exports = (sequelize, DataTypes) => {
     affiliation: {
       type: DataTypes.STRING,
     },
+  }, {
+    hooks: {
+      beforeCreate: async function(user){
+        const salt = await bcrypt.genSalt();
+        user.hash = await bcrypt.hash(user.hash, salt);
+      }
+    },
   });
+
+  User.prototype.validPassword = async function (hash) {
+    return await bcrypt.compare(hash, this.hash);
+  };
 
   User.associate = (models) => {
     User.hasMany(models.Post, {

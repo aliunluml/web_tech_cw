@@ -4,6 +4,7 @@
   "description": "COMS32500 Web Technologies Project",
   "main": "server.js",
   "dependencies": {
+    "bcrypt": "^3.0.6",
     "body-parser": "^1.18.3",
     "dotenv": "^7.0.0",
     "ejs": "^2.6.1",
@@ -12,7 +13,7 @@
     "express-session": "^1.16.1",
     "helmet": "^3.16.0",
     "morgan": "^1.9.1",
-    "sequelize": "^5.2.3",
+    "sequelize": "^5.8.6",
     "sequelize-cli": "^5.4.0",
     "sqlite3": "^4.0.6"
   },

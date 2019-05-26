@@ -4,10 +4,16 @@
     Login
   </h2>
 
-  <% if(noMatch==="true"){ %>
+  <% if(invalidEmail==="true"){ %>
     <div class="alert">
       <span class="closebtn">&times;</span>
-      <strong>Login Failed: </strong> Please make sure you provide the correct email and password.
+      <strong>No account found with the given email address: </strong> You can sign up for one.
+    </div>
+  <% } %>
+  <% if(invalidPassword==="true"){ %>
+    <div class="alert">
+      <span class="closebtn">&times;</span>
+      <strong>Incorrect password: </strong> Please check your password.
     </div>
   <% } %>
 

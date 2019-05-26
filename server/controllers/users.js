@@ -66,27 +66,32 @@ module.exports = {
   },
   match(req, res, next) {
     return User
-      .findAll({
+      .findOne({
         where: {
           email: req.body.email,
-          hash: req.body.password,
         },
         include: [{
           model: Post,
           as: 'posts',
         }],
       })
-      .then(users => {
-        if (users.length===0) {
-          //No feedback is given to the user at the moment.
+      .then(async function(user){
+        if (!user) {
           return res.render('login.ejs',{
-            noMatch:"true",
+            invalidEmail:"true",
+            invalidPassword:"false",
+            logged:"false",
+          });
+        }
+        else if (!await user.validPassword(req.body.password)) {
+          return res.render('login.ejs',{
+            invalidEmail:"false",
+            invalidPassword:"true",
             logged:"false",
           });
         }
         else {
-          //findAll() outputs an array.
-          req.session.user = users[0];
+          req.session.user = user;
           next();
         }
       })
