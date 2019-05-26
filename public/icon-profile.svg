@@ -10,5 +10,4 @@
   </defs>
   <circle cx="30" cy="18" r="18" fill="url(#gradient)"/>                # head
   <circle cx="30" cy="60" r="30" fill="transparent" stroke="black"/>    # body
-  Sorry, your browser does not support inline SVG.
 </svg>

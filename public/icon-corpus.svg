@@ -14,5 +14,4 @@
   <path d=" M 10 40 l 40 0 " fill="transparent" stroke="black"/>        # a line on the page
   <path d=" M 10 50 l 40 0 " fill="transparent" stroke="black"/>        # a line on the page
   <path d=" M 5 0 l 50 0 l 0 10 l -50 0 l 0 -10 " fill="url(#gradient)"/>
-  Sorry, your browser does not support inline SVG.
 </svg>

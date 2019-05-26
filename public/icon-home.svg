@@ -11,5 +11,4 @@
   <path d=" M 10 20 l 0 35 l 40 0 l 0 -35 l -40 0 " fill="transparent" stroke="black"/>
   <path d=" M 15 55 l 0 -20 l 15 0 l 0 20 l -15 0 " fill="url(#gradient)"/>      # the door of the home
   <path d=" M 30 0 l -30 20 l 60 0 l -30 -20 " fill="url(#gradient)"/>           # the rooftop of the home
-  Sorry, your browser does not support inline SVG.
 </svg>

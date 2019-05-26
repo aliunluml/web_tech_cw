@@ -13,5 +13,4 @@
   <path d=" M 15 50 l 40 -40 " fill="transparent" stroke="black"/>
   <path d=" M 5 55 l 0 -15 l 15 15 l -15 0 " fill="url(#gradient)"/>          # the end of the pencil
   <path d=" M 45 0 l 15 15 l -5 5 l -15 -15 l 5 -5 " fill="url(#gradient)"/>  # the eraser on the other end
-  Sorry, your browser does not support inline SVG.
 </svg>
