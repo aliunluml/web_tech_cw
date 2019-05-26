@@ -11,10 +11,7 @@ module.exports = {
         username: req.body.username,
         name: req.body.name,
         email: req.body.email,
-        //This is temporary and unsecure. We will store only an encrypted password hash
-        //, not the actual password string as we are doing at the moment.
-        //Waiting for the bcrypt dependency node-gyp issues to be solved.
-        //See https://github.com/sass/node-sass/issues/2625
+        // Later on in user.js model, the beforeCreate() function is called to encrypt hash
         hash: req.body.password,
         affiliation: req.body.affiliation,
         title: req.body.title,
