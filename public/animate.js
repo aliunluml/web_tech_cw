@@ -56,16 +56,8 @@ document.addEventListener('DOMContentLoaded', () => {
         request.responseType = 'json';
 
         request.onload = function() {
-          if (request.status===200) {
-            ol.removeChild(li);
-            alert(request.response.message);
-          }
-          else if (request.status===404) {
-            alert(request.response.message);
-          }
-          else {
-            alert("NOT 200, NOT 404");
-          }
+          ol.removeChild(li);
+          alert(request.response.message);
         };
 
         request.send();
