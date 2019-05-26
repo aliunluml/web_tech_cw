@@ -7,6 +7,48 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   //   message: 'Welcome to the Todos API!',
   // }));
 
+  function checkPostOwnership(req, res, next){
+    var owner = false;
+    for (var i = 0; i < req.session.user.posts.length; i++) {
+      if (req.session.user.posts[i].id===parseInt(req.params.id)) {
+        req.session.user.posts.splice(i,1);
+        owner = true;
+        break;
+      }
+    }
+    if(owner){
+      next();
+    }
+    else{
+      res.status(403);
+      res.render('error.ejs',{
+        logged:"true",
+        errorMessage: "403 Forbidden"
+      });
+    }
+  }
+
+  function checkAccountOwnership(req, res, next){
+    var owner = false;
+    if (req.session.user.username===req.params.username) {
+      req.params.id = req.session.user.id;
+      req.session.destroy(() => {
+         console.log("Account to be terminated.")
+      });
+      owner = true;
+    }
+    if(owner){
+      next();
+    }
+    else{
+      res.status(403);
+      res.render('error.ejs',{
+        logged:"true",
+        errorMessage: "403 Forbidden"
+      });
+    }
+  }
+
 
   app.use('/signup', checkLogin, (req, res) => {
     res.redirect('/dashboard');
@@ -39,16 +81,16 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.use('/dashboard', checkLogin, loginRedirect);
 
 
+  app.delete('/user/:username', checkLogin, checkAccountOwnership, usersController.destroy, (req, res, next) => {
+    res.status(200).send({ message: 'Account terminated successfully.'});
+  });
+
+
   app.post('/post', checkLogin, postsController.create, (req, res, next) => {
     res.redirect('/dashboard');
   });
-  app.delete('/post/:id', checkLogin, postsController.destroy, (req, res, next) => {
-    for (var i = 0; i < req.session.user.posts.length; i++) {
-      if (req.session.user.posts[i].id===parseInt(req.params.id)) {
-        req.session.user.posts.splice(i,1);
-        break;
-      }
-    }
+
+  app.delete('/post/:id', checkLogin, checkPostOwnership, postsController.destroy, (req, res, next) => {
     res.status(200).send({ message: 'Post deleted successfully.' });
   });
   app.use('/post', checkLogin, loginRedirect);

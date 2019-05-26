@@ -43,10 +43,27 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  var deletebtns = document.getElementsByClassName("delete_button");
+  var terminatebtn = document.getElementById('terminate');
+  if (terminatebtn) {
+    terminatebtn.onclick = function(){
+      var url = "/user/" + this.value;
+      var request = new XMLHttpRequest();
+      request.open('DELETE', url);
+      request.responseType = 'json';
+
+      request.onload = function() {
+        alert(request.response.message);
+        window.location.href = '/';
+      };
+
+      request.send();
+    };
+  }
+
+  var deletebtns = document.querySelectorAll("li > .delete_button");
   if (deletebtns) {
-    for (var i = 0; i < deletebtns.length; i++) {
-      deletebtns[i].onclick = function(){
+    deletebtns.forEach(function(deletebtn){
+      deletebtn.onclick = function(){
         var li = this.parentElement;
         var ol = li.parentElement;
 
@@ -62,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         request.send();
       };
-    }
+    });
   }
 
 });

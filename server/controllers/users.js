@@ -188,20 +188,38 @@ module.exports = {
   //     })
   //     .catch((error) => res.status(400).send(error));
   // },
-  // destroy(req, res) {
-  //   return User
-  //     .findByPk(req.params.userId)
-  //     .then(user => {
-  //       if (!user) {
-  //         return res.status(400).send({
-  //           message: 'User Not Found',
-  //         });
-  //       }
-  //       return user
-  //         .destroy()
-  //         .then(() => res.status(200).send({ message: 'User deleted successfully.' }))
-  //         .catch(error => res.status(400).send(error));
-  //     })
-  //     .catch(error => res.status(400).send(error));
-  // },
+  destroy(req, res, next) {
+    return User
+      .findByPk(req.params.id)
+      .then(user => {
+        if (!user) {
+          res.status(404);
+          return res.render('error.ejs',{
+            logged:"true",
+            errorMessage: "404 Not found"
+          });
+        }
+        return user
+          .destroy()
+          .then(() => {
+            next();
+          })
+          .catch(error => {
+            console.log(error);
+            res.status(400);
+            res.render('error.ejs',{
+              logged:"true",
+              errorMessage: "400 Bad request"
+            });
+          });
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
+  },
 };
