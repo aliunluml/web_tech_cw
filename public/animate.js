@@ -38,9 +38,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var contentTextarea = document.getElementById('contentTextarea');
   if (contentTextarea) {
-    contentTextarea.addEventListener('input', function () {
+    contentTextarea.oninput = function () {
       autoExpand(contentTextarea);
-    }, false);
+    };
   }
 
   var deletebtns = document.getElementsByClassName("delete_button");
