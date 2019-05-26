@@ -19,7 +19,14 @@ module.exports = {
       .then(user => {
         next();
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"false",
+          errorMessage: "400 Bad request"
+        });
+      });
   },
   eligible(req, res, next) {
     return User
@@ -56,10 +63,16 @@ module.exports = {
             logged:"false",
           });
 
-          // return res.redirect('/signup');
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"false",
+          errorMessage: "400 Bad request"
+        });
+      });
   },
   match(req, res, next) {
     return User
@@ -92,7 +105,14 @@ module.exports = {
           next();
         }
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"false",
+          errorMessage: "400 Bad request"
+        });
+      });
   },
   list(req, res, next) {
     return User
@@ -114,7 +134,14 @@ module.exports = {
         req.session.corpusFeed = buffer;
         next();
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
   },
   // retrieve(req, res) {
   //   return User

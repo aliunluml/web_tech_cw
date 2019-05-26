@@ -12,7 +12,14 @@ module.exports = {
         req.session.user.posts.push(post);
         next();
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
   },
   // list(req, res) {
   //   return Post
@@ -61,8 +68,10 @@ module.exports = {
       .findByPk(req.params.id)
       .then(post => {
         if (!post) {
-          return res.status(404).send({
-            message: 'Post Not Found',
+          res.status(404);
+          return res.render('error.ejs',{
+            logged:"true",
+            errorMessage: "404 Not found"
           });
         }
         return post
@@ -70,6 +79,13 @@ module.exports = {
           .then(() => res.status(200).send({ message: 'Post deleted successfully.' }))
           .catch(error => res.status(400).send(error));
       })
-      .catch(error => res.status(400).send(error));
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
   },
 };
