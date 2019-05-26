@@ -22,6 +22,7 @@
       <% posts.forEach(post => { %>
       <li>
         <article><%= post.content %></article><br>
+        <button class="delete_button" type="button" value="<%= post.id %>">Delete</button>
         Likes: <%= post.likes %><br>
         Dislikes: <%= post.dislikes %><br>
       </li>

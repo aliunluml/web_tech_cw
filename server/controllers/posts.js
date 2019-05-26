@@ -63,7 +63,7 @@ module.exports = {
   //     })
   //     .catch(error => res.status(400).send(error));
   // },
-  destroy(req, res) {
+  destroy(req, res, next) {
     return Post
       .findByPk(req.params.id)
       .then(post => {
@@ -76,8 +76,17 @@ module.exports = {
         }
         return post
           .destroy()
-          .then(() => res.status(200).send({ message: 'Post deleted successfully.' }))
-          .catch(error => res.status(400).send(error));
+          .then(() => {
+            next();
+          })
+          .catch(error => {
+            console.log(error);
+            res.status(400);
+            res.render('error.ejs',{
+              logged:"true",
+              errorMessage: "400 Bad request"
+            });
+          });
       })
       .catch(error => {
         console.log(error);

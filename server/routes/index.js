@@ -42,7 +42,15 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.post('/post', checkLogin, postsController.create, (req, res, next) => {
     res.redirect('/dashboard');
   });
-  app.delete('/post/:id', checkLogin, postsController.destroy);
+  app.delete('/post/:id', checkLogin, postsController.destroy, (req, res, next) => {
+    for (var i = 0; i < req.session.user.posts.length; i++) {
+      if (req.session.user.posts[i].id===parseInt(req.params.id)) {
+        req.session.user.posts.splice(i,1);
+        break;
+      }
+    }
+    res.status(200).send({ message: 'Post deleted successfully.' });
+  });
   app.use('/post', checkLogin, loginRedirect);
 
 
