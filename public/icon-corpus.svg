@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!-- Created with Inkscape (http://www.inkscape.org/) -->
+
+<svg width="60" height="60" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="gradient" x1="0%" y1="0%" x2="0%" y2="100%">
+      <stop offset="0%" style="stop-color:rgb(0, 0, 0); stop-opacity:1" />
+      <stop offset="100%" style="stop-color:rgb(150, 150, 150); stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <path d=" M 5 0 l 50 0 l 0 60 l -50 0 l 0 -60 " fill="transparent" stroke="black"/>
+  <path d=" M 10 20 l 40 0 " fill="transparent" stroke="black"/>        # a line on the page
+  <path d=" M 10 30 l 40 0 " fill="transparent" stroke="black"/>        # a line on the page
+  <path d=" M 10 40 l 40 0 " fill="transparent" stroke="black"/>        # a line on the page
+  <path d=" M 10 50 l 40 0 " fill="transparent" stroke="black"/>        # a line on the page
+  <path d=" M 5 0 l 50 0 l 0 10 l -50 0 l 0 -10 " fill="url(#gradient)"/>
+  Sorry, your browser does not support inline SVG.
+</svg>
