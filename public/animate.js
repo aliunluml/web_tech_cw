@@ -43,4 +43,34 @@ document.addEventListener('DOMContentLoaded', () => {
     }, false);
   }
 
+  var deletebtns = document.getElementsByClassName("delete_button");
+  if (deletebtns) {
+    for (var i = 0; i < deletebtns.length; i++) {
+      deletebtns[i].onclick = function(){
+        var li = this.parentElement;
+        var ol = li.parentElement;
+
+        var url = "/post/" + this.value;
+        var request = new XMLHttpRequest();
+        request.open('DELETE', url);
+        request.responseType = 'json';
+
+        request.onload = function() {
+          if (request.status===200) {
+            ol.removeChild(li);
+            alert(request.response.message);
+          }
+          else if (request.status===404) {
+            alert(request.response.message);
+          }
+          else {
+            alert("NOT 200, NOT 404");
+          }
+        };
+
+        request.send();
+      };
+    }
+  }
+
 });

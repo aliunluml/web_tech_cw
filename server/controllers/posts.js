@@ -56,21 +56,20 @@ module.exports = {
   //     })
   //     .catch(error => res.status(400).send(error));
   // },
-  // destroy(req, res) {
-  //   return Post
-  //     .findByPk(req.params.postId)
-  //     .then(post => {
-  //       if (!post) {
-  //         return res.status(404).send({
-  //           message: 'Post Not Found',
-  //         });
-  //       }
-  //
-  //       return post
-  //         .destroy()
-  //         .then(() => res.status(200).send({ message: 'Post deleted successfully.' }))
-  //         .catch(error => res.status(400).send(error));
-  //     })
-  //     .catch(error => res.status(400).send(error));
-  // },
+  destroy(req, res) {
+    return Post
+      .findByPk(req.params.id)
+      .then(post => {
+        if (!post) {
+          return res.status(404).send({
+            message: 'Post Not Found',
+          });
+        }
+        return post
+          .destroy()
+          .then(() => res.status(200).send({ message: 'Post deleted successfully.' }))
+          .catch(error => res.status(400).send(error));
+      })
+      .catch(error => res.status(400).send(error));
+  },
 };

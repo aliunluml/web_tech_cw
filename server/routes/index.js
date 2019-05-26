@@ -42,6 +42,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.post('/post', checkLogin, postsController.create, (req, res, next) => {
     res.redirect('/dashboard');
   });
+  app.delete('/post/:id', checkLogin, postsController.destroy);
   app.use('/post', checkLogin, loginRedirect);
 
 
