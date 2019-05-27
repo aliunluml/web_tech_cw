@@ -53,6 +53,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   function checkLikeOwnership(req, res, next){
     var owner = false;
+    console.log(req.session.user.likes);
     for (var i = 0; i < req.session.user.likes.length; i++) {
       if (req.session.user.likes[i].id===parseInt(req.params.id)) {
         req.session.user.likes.splice(i,1);
@@ -60,6 +61,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
         break;
       }
     }
+    console.log("INSIDE 2");
+    console.log(owner);
     if(owner){
       next();
     }
@@ -136,17 +139,21 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
     req.session.user.likes.push(req.params.post);
     res.sendStatus(201);
   });
+
   app.delete('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, checkLikeOwnership, likesController.destroy, (req, res, next) => {
     res.sendStatus(204);
   });
+
+
   app.get('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, dislikesController.create, postsController.retrieve, (req, res, next) => {
     req.session.user.dislikes.push(req.params.post);
     res.sendStatus(201);
   });
+
   app.delete('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, checkDislikeOwnership, dislikesController.destroy, (req, res, next) => {
@@ -161,17 +168,19 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   function prepare(req, posts){
     var sentPosts = [];
-    posts.forEach(post=>{
-      var sentPost = {
-        liked: post.likedBys.includes(req.session.user).toString(),
-        disliked: post.dislikedBys.includes(req.session.user).toString(),
-        id: post.id,
-        content: post.content,
-        likeCount: (post.likedBys===undefined) ? "0" : post.likedBys.length.toString(),
-        dislikeCount: (post.dislikedBys===undefined) ? "0" : post.dislikedBys.length.toString(),
-      };
-      sentPosts.push(sentPost);
-    });
+    if (posts) {
+      posts.forEach(post=>{
+        var sentPost = {
+          liked: req.session.user.likes.includes(post).toString(),
+          disliked: req.session.user.dislikes.includes(post).toString(),
+          id: post.id,
+          content: post.content,
+          likeCount: (post.likedBys===undefined) ? "0" : post.likedBys.length.toString(),
+          dislikeCount: (post.dislikedBys===undefined) ? "0" : post.dislikedBys.length.toString(),
+        };
+        sentPosts.push(sentPost);
+      });
+    }
     return sentPosts;
   }
 

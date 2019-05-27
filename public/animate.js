@@ -87,15 +87,12 @@ document.addEventListener('DOMContentLoaded', () => {
 
   var likebtns = document.querySelectorAll("article > .submit_button.like");
   if (likebtns) {
-    for (var i = 0; i < likebtns.length; i++) {
-      var article = likebtns[i].parentNode;
-      var likeP = article.childNodes[3];
-      var likeSpan = likeP.firstChild;
-      if (article.dataset.liked==="false") {
-
-        likebtns[i].onclick = function(){
-          var count = parseInt(likeSpan.innerHTML);
-
+    likebtns.forEach(likebtn => {
+      var article = likebtn.parentElement;
+      var likeSpan = article.children[3].firstElementChild;
+      var count = parseInt(likeSpan.innerHTML);
+      likebtn.onclick = function(){
+        if (article.getAttribute("data-liked")==="false") {
           var url = "/post/" + this.value + "/like";
           var request = new XMLHttpRequest();
           request.open('GET', url);
@@ -104,19 +101,14 @@ document.addEventListener('DOMContentLoaded', () => {
           request.onload = function() {
             if (request.status===201) {
               count++;
-              likeSpan.innerHTML = count;
-              article.dataset.liked = "true";
+              likeSpan.innerHTML = count.toString();
+              article.setAttribute("data-liked","true");
             }
           };
 
           request.send();
-        };
-
-      } else {
-
-        likebtns[i].onclick = function(){
-          var count = parseInt(likeSpan.innerHTML);
-
+        }
+        else{
           var url = "/post/" + this.value + "/like";
           var request = new XMLHttpRequest();
           request.open('DELETE', url);
@@ -126,15 +118,59 @@ document.addEventListener('DOMContentLoaded', () => {
             if (request.status===204) {
               count--;
               likeSpan.innerHTML = count;
-              article.dataset.liked = "false";
+              article.setAttribute("data-liked","false");
             }
           };
 
           request.send();
-
-        };
-      }
-    }
+        }
+      };
+    });
   }
+
+
+  var dislikebtns = document.querySelectorAll("article > .submit_button.dislike");
+  if (dislikebtns) {
+    dislikebtns.forEach(dislikebtn => {
+      var article = dislikebtn.parentElement;
+      var dislikeSpan = article.children[4].firstElementChild;
+      var count = parseInt(dislikeSpan.innerHTML);
+      dislikebtn.onclick = function(){
+        if (article.getAttribute("data-disliked")==="false") {
+          var url = "/post/" + this.value + "/dislike";
+          var request = new XMLHttpRequest();
+          request.open('GET', url);
+          request.responseType = 'text';
+
+          request.onload = function() {
+            if (request.status===201) {
+              count++;
+              dislikeSpan.innerHTML = count.toString();
+              article.setAttribute("data-disliked","true");
+            }
+          };
+
+          request.send();
+        }
+        else{
+          var url = "/post/" + this.value + "/dislike";
+          var request = new XMLHttpRequest();
+          request.open('DELETE', url);
+          request.responseType = 'text';
+
+          request.onload = function() {
+            if (request.status===204) {
+              count--;
+              dislikeSpan.innerHTML = count;
+              article.setAttribute("data-disliked","false");
+            }
+          };
+
+          request.send();
+        }
+      };
+    });
+  }
+
 
 });
