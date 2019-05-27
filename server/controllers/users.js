@@ -190,6 +190,29 @@ module.exports = {
         });
       });
   },
+  fetchPosts(req, res, next) {
+    return User
+      .findByPk(req.session.user.id,{
+        include: [{
+          model: Post,
+          as: 'posts',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
+        }],
+      })
+      .then(user => {
+        req.session.user.posts = user.posts;
+        next();
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          username: req.session.user.username,
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
+  },
   // retrieve(req, res) {
   //   return User
   //     .findByPk(req.params.userId, {

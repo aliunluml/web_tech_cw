@@ -119,6 +119,11 @@ document.addEventListener('DOMContentLoaded', () => {
               count--;
               likeSpan.innerHTML = count;
               article.setAttribute("data-liked","false");
+              if (window.location.pathname==="/profile") {
+                var li = article.parentElement;
+                var ol = li.parentElement;
+                ol.removeChild(li);
+              }
             }
           };
 
@@ -163,11 +168,11 @@ document.addEventListener('DOMContentLoaded', () => {
               count--;
               dislikeSpan.innerHTML = count;
               article.setAttribute("data-disliked","false");
-              // if (window.location.pathname==="/profile") {
-              //   var li = article.parentElement;
-              //   var ol = li.parentElement;
-              //   ol.removeChild(li);
-              // }
+              if (window.location.pathname==="/profile") {
+                var li = article.parentElement;
+                var ol = li.parentElement;
+                ol.removeChild(li);
+              }
             }
           };
 

@@ -9,8 +9,6 @@ module.exports = {
         userId: req.session.user.id,
       })
       .then(post => {
-        //Update the current session. Otherwise, need to query User DB once again.
-        req.session.user.posts.push(post);
         next();
       })
       .catch(error => {

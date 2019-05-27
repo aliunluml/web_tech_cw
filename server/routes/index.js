@@ -131,7 +131,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   });
 
 
-  app.post('/post', checkLogin, postsController.create, (req, res, next) => {
+  app.post('/post', checkLogin, postsController.create, usersController.fetchPosts, (req, res, next) => {
     res.redirect('/dashboard');
   });
 
