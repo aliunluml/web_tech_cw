@@ -1,6 +1,4 @@
 const Post = require('../models').Post;
-const Like = require('../models').Like;
-const Dislike = require('../models').Dislike;
 
 module.exports = {
   create(req, res, next) {

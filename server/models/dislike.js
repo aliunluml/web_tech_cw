@@ -1,3 +1,5 @@
+const User = require('.').User;
+const Post = require('.').Post;
 'use strict';
 module.exports = (sequelize, DataTypes) => {
   const Dislike = sequelize.define('Dislike', {

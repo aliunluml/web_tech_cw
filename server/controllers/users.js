@@ -3,8 +3,6 @@ const Op = Sequelize.Op;
 
 const User = require('../models').User;
 const Post = require('../models').Post;
-const Like = require('../models').Like;
-const Dislike = require('../models').Dislike;
 
 module.exports = {
   create(req, res, next) {
@@ -85,6 +83,12 @@ module.exports = {
         include: [{
           model: Post,
           as: 'posts',
+        }, {
+          model: Post,
+          as: 'likes',
+        }, {
+          model: Post,
+          as: 'dislikes',
         }],
       })
       .then(async function(user){
@@ -122,6 +126,12 @@ module.exports = {
         include: [{
           model: Post,
           as: 'posts',
+        }, {
+          model: Post,
+          as: 'likes',
+        }, {
+          model: Post,
+          as: 'dislikes',
         }],
       })
       .then(users => {
