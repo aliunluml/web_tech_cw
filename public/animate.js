@@ -46,7 +46,7 @@ document.addEventListener('DOMContentLoaded', () => {
   var terminatebtn = document.getElementById('terminate');
   if (terminatebtn) {
     terminatebtn.onclick = function(){
-      if (window.confirm("Terminate My Account:\nIf you would like to permanently terminate you account, please confirm by pressing OK.  Once your account is terminated, you would not be able to reactivate it or retrieve any related content.")) {
+      if (window.confirm("Terminate My Account:\nIf you would like to permanently terminate you account, please confirm by clicking OK.  Once your account is terminated, you would not be able to reactivate it or retrieve any related content.")) {
         var url = "/user/" + this.value;
         var request = new XMLHttpRequest();
         request.open('DELETE', url);
