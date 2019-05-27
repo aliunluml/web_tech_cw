@@ -46,17 +46,19 @@ document.addEventListener('DOMContentLoaded', () => {
   var terminatebtn = document.getElementById('terminate');
   if (terminatebtn) {
     terminatebtn.onclick = function(){
-      var url = "/user/" + this.value;
-      var request = new XMLHttpRequest();
-      request.open('DELETE', url);
-      request.responseType = 'json';
+      if (window.confirm("Terminate My Account:\nIf you would like to permanently terminate you account, please confirm by pressing OK.  Once your account is terminated, you would not be able to reactivate it or retrieve any related content.")) {
+        var url = "/user/" + this.value;
+        var request = new XMLHttpRequest();
+        request.open('DELETE', url);
+        request.responseType = 'json';
 
-      request.onload = function() {
-        alert(request.response.message);
-        window.location.href = '/';
-      };
+        request.onload = function() {
+          alert(request.response.message);
+          window.location.href = '/';
+        };
 
-      request.send();
+        request.send();
+      }
     };
   }
 
