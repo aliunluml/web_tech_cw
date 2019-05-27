@@ -4,6 +4,21 @@ const Op = Sequelize.Op;
 const User = require('../models').User;
 const Post = require('../models').Post;
 
+
+function prepare(posts){
+  var sentPosts = [];
+  posts.forEach(post=>{
+    var sentPost = {
+      id: post.id,
+      content: post.content,
+      likeCount: (post.likedBys===undefined) ? "0" : post.likedBys.length.toString(),
+      dislikeCount: (post.dislikedBys===undefined) ? "0" : post.dislikedBys.length.toString(),
+    };
+    sentPosts.push(sentPost);
+  });
+  return sentPosts;
+}
+
 module.exports = {
   create(req, res, next) {
     return User
@@ -83,12 +98,15 @@ module.exports = {
         include: [{
           model: Post,
           as: 'posts',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
         }, {
           model: Post,
           as: 'likes',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
         }, {
           model: Post,
           as: 'dislikes',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
         }],
       })
       .then(async function(user){
@@ -126,12 +144,7 @@ module.exports = {
         include: [{
           model: Post,
           as: 'posts',
-        }, {
-          model: Post,
-          as: 'likes',
-        }, {
-          model: Post,
-          as: 'dislikes',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
         }],
       })
       .then(users => {
@@ -139,7 +152,7 @@ module.exports = {
         users.forEach(user => {
           var item = {
             username: user.username,
-            posts: user.posts,
+            posts: prepare(user.posts),
           };
           buffer.push(item);
         });

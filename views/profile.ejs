@@ -25,8 +25,40 @@
         <article>
           <p><%= post.content %></p>
           <button class="delete_button" type="button" value="<%= post.id %>">Delete</button>
-          <p>Likes: <%= post.likes %></p>
-          <p>Dislikes: <%= post.dislikes %></p>
+          <p>Likes: <%= post.likeCount %></p>
+          <p>Dislikes: <%= post.dislikeCount %></p>
+        </article>
+      </li>
+      <% }); %>
+    </ol>
+  </section>
+
+  <h3>Posts I liked</h3>
+
+  <section>
+    <ol>
+      <% likedPosts.forEach(post => { %>
+      <li>
+        <article>
+          <p><%= post.content %></p>
+          <p>Likes: <%= post.likeCount %></p>
+          <p>Dislikes: <%= post.dislikeCount %></p>
+        </article>
+      </li>
+      <% }); %>
+    </ol>
+  </section>
+
+  <h3>Posts I disliked</h3>
+
+  <section>
+    <ol>
+      <% dislikedPosts.forEach(post => { %>
+      <li>
+        <article>
+          <p><%= post.content %></p>
+          <p>Likes: <%= post.likeCount %></p>
+          <p>Dislikes: <%= post.dislikeCount %></p>
         </article>
       </li>
       <% }); %>

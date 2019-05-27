@@ -18,9 +18,12 @@
               <p><%= post.content %></p>
               <% if(user.username===username){ %>
                 <button class="delete_button" type="button" value="<%= post.id %>">Delete</button>
+              <% } else { %>
+                <button class="submit_button" type="button" value="<%= post.id %>">Like</button>
+                <button class="submit_button" type="button" value="<%= post.id %>">Dislike</button>
               <% } %>
-              <p>Likes: <%= post.likes %></p>
-              <p>Dislikes: <%= post.dislikes %></p>
+              <p>Likes: <%= post.likeCount %></p>
+              <p>Dislikes: <%= post.dislikeCount %></p>
             </article>
           </li>
           <% }); %>

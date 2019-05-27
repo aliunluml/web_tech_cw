@@ -1,5 +1,7 @@
 const usersController = require('../controllers').users;
 const postsController = require('../controllers').posts;
+const likesController = require('../controllers').likes;
+const dislikesController = require('../controllers').dislikes;
 
 
 module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
@@ -7,12 +9,16 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   //   message: 'Welcome to the Todos API!',
   // }));
 
-  function checkPostOwnership(req, res, next){
-    var owner = false;
+  function deletePostInSession(req, res, next){
+    req.session.user.posts.splice(req.params.index,1);
+    next();
+  }
+
+  function checkPostOwnership(req, res, next, owner=false){
     for (var i = 0; i < req.session.user.posts.length; i++) {
       if (req.session.user.posts[i].id===parseInt(req.params.id)) {
-        req.session.user.posts.splice(i,1);
-        owner = true;
+        req.params.index = i;
+        owner = !owner;
         break;
       }
     }
@@ -25,6 +31,40 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
         logged:"true",
         errorMessage: "403 Forbidden"
       });
+    }
+  }
+
+  function checkDislikeOwnership(req, res, next){
+    var owner = false;
+    for (var i = 0; i < req.session.user.dislikes.length; i++) {
+      if (req.session.user.dislikes[i].id===parseInt(req.params.id)) {
+        req.session.user.dislikes.splice(i,1);
+        owner = true;
+        break;
+      }
+    }
+    if(owner){
+      next();
+    }
+    else{
+      res.sendStatus(204);
+    }
+  }
+
+  function checkLikeOwnership(req, res, next){
+    var owner = false;
+    for (var i = 0; i < req.session.user.likes.length; i++) {
+      if (req.session.user.likes[i].id===parseInt(req.params.id)) {
+        req.session.user.likes.splice(i,1);
+        owner = true;
+        break;
+      }
+    }
+    if(owner){
+      next();
+    }
+    else{
+      res.sendStatus(204);
     }
   }
 
@@ -90,7 +130,28 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
     res.redirect('/dashboard');
   });
 
-  app.delete('/post/:id', checkLogin, checkPostOwnership, postsController.destroy, (req, res, next) => {
+  app.get('/post/:id/like', checkLogin, function(req, res, next){
+    checkPostOwnership(req, res, next, true);
+  }, likesController.create, (req, res, next) => {
+    res.sendStatus(201);
+  });
+  app.delete('/post/:id/like', checkLogin, function(req, res, next){
+    checkPostOwnership(req, res, next, true);
+  }, checkLikeOwnership, likesController.destroy, (req, res, next) => {
+    res.sendStatus(204);
+  });
+  app.get('/post/:id/dislike', checkLogin, function(req, res, next){
+    checkPostOwnership(req, res, next, true);
+  }, dislikesController.create, (req, res, next) => {
+    res.sendStatus(201);
+  });
+  app.delete('/post/:id/dislike', checkLogin, function(req, res, next){
+    checkPostOwnership(req, res, next, true);
+  }, checkDislikeOwnership, dislikesController.destroy, (req, res, next) => {
+    res.sendStatus(204);
+  });
+
+  app.delete('/post/:id', checkLogin, checkPostOwnership, deletePostInSession, postsController.destroy, (req, res, next) => {
     res.status(200).send({ message: 'Post deleted successfully.' });
   });
   app.use('/post', checkLogin, loginRedirect);
@@ -105,15 +166,35 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   });
   app.use('/corpus', checkLogin, loginRedirect);
 
+  function prepare(posts){
+    var sentPosts = [];
+    posts.forEach(post=>{
+      var sentPost = {
+        id: post.id,
+        content: post.content,
+        likeCount: (post.likedBys===undefined) ? "0" : post.likedBys.length.toString(),
+        dislikeCount: (post.dislikedBys===undefined) ? "0" : post.dislikedBys.length.toString(),
+      };
+      sentPosts.push(sentPost);
+    });
+    return sentPosts;
+  }
+
 
   app.get('/profile', checkLogin, (req, res) => {
+    var posts = prepare(req.session.user.posts);
+    var likedPosts = prepare(req.session.user.likes);
+    var dislikedPosts = prepare(req.session.user.dislikes);
+
     res.render('profile.ejs',{
       username: req.session.user.username,
       logged:"true",
       name: req.session.user.name,
       affiliation: req.session.user.affiliation || "Not given",
       position: req.session.user.position || "Not given",
-      posts: req.session.user.posts,
+      posts: posts,
+      likedPosts: likedPosts,
+      dislikedPosts: dislikedPosts,
     });
   });
   app.use('/profile', checkLogin, loginRedirect);

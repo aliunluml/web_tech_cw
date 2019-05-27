@@ -4,14 +4,6 @@ module.exports = (sequelize, DataTypes) => {
       type: DataTypes.TEXT,
       allowNull: false,
     },
-    likes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
-    dislikes: {
-      type: DataTypes.INTEGER,
-      defaultValue: 0,
-    },
   });
 
   Post.associate = (models) => {
