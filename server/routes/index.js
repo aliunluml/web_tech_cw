@@ -137,12 +137,14 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
     checkPostOwnership(req, res, next, true);
   }, likesController.create, postsController.retrieve, (req, res, next) => {
     req.session.user.likes.push(req.params.post);
+    console.log(req.session.user.likes);
     res.sendStatus(201);
   });
 
   app.delete('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, checkLikeOwnership, likesController.destroy, (req, res, next) => {
+    console.log(req.session.user.likes);
     res.sendStatus(204);
   });
 
@@ -198,9 +200,10 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
 
   app.get('/profile', checkLogin, (req, res) => {
-    var posts = prepare(req.session.user.posts);
-    var likedPosts = prepare(req.session.user.likes);
-    var dislikedPosts = prepare(req.session.user.dislikes);
+    console.log(req.session.user.likes);
+    var posts = prepare(req,req.session.user.posts);
+    var likedPosts = prepare(req,req.session.user.likes);
+    var dislikedPosts = prepare(req,req.session.user.dislikes);
 
     res.render('profile.ejs',{
       username: req.session.user.username,
