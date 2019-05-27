@@ -138,8 +138,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.get('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, likesController.create, postsController.retrieve, (req, res, next) => {
-    req.params.post.likedBys.push(req.session.user);
-    req.session.user.likes.push(req.params.post);
+    req.params.post.likedBys = (req.params.post.likedBys || []).push(req.session.user);
+    req.session.user.likes = (req.session.user.likes || []).push(req.params.post);
     console.log(req.session.user.likes);
     res.sendStatus(201);
   });
@@ -155,8 +155,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.get('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, dislikesController.create, postsController.retrieve, (req, res, next) => {
-    req.params.post.dislikedBys.push(req.session.user);
-    req.session.user.dislikes.push(req.params.post);
+    req.params.post.dislikedBys = (req.params.post.dislikedBys || []).push(req.session.user);
+    req.session.user.dislikes = (req.session.user.dislikes || []).push(req.params.post);
     res.sendStatus(201);
   });
 
@@ -174,18 +174,21 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   function prepare(req, posts){
     var sentPosts = [];
+    console.log(posts);
     if (posts) {
-      posts.forEach(post=>{
+      for (var i = 0; i < posts.length; i++) {
+      // posts.forEach(post=>{
         var sentPost = {
-          liked: req.session.user.likes.includes(post).toString(),
-          disliked: req.session.user.dislikes.includes(post).toString(),
-          id: post.id,
-          content: post.content,
-          likeCount: (post.likedBys===undefined) ? "0" : post.likedBys.length.toString(),
-          dislikeCount: (post.dislikedBys===undefined) ? "0" : post.dislikedBys.length.toString(),
+          liked: (posts[i].likedBys || []).includes(req.session.user).toString(),
+          disliked: (posts[i].dislikedBys || []).includes(req.session.user).toString(),
+          id: posts[i].id,
+          content: posts[i].content,
+          likeCount: (posts[i].likedBys===undefined) ? "0" : posts[i].likedBys.length.toString(),
+          dislikeCount: (posts[i].dislikedBys===undefined) ? "0" : posts[i].dislikedBys.length.toString(),
         };
         sentPosts.push(sentPost);
-      });
+      // });
+      }
     }
     return sentPosts;
   }
