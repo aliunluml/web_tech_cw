@@ -7,6 +7,12 @@ textarea {
 	height: 100%;
 }
 
+article{
+  border-style: solid;
+  margin: 5px;
+  padding: 5px;
+}
+
 .container{
   text-align: center;
 }
@@ -79,8 +85,12 @@ textarea {
   padding-right: 1.5%;
   padding-top: 0.5%;
   padding-bottom: 0.5%;
-	margin-left: 1%;
   border: none;
+}
+
+article > .delete_button{
+  margin-left: auto;
+  margin-right: 0;
 }
 
 footer{

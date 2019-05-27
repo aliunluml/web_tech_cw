@@ -62,11 +62,12 @@ document.addEventListener('DOMContentLoaded', () => {
     };
   }
 
-  var deletebtns = document.querySelectorAll("li > .delete_button");
+  var deletebtns = document.querySelectorAll("article > .delete_button");
   if (deletebtns) {
     deletebtns.forEach(function(deletebtn){
       deletebtn.onclick = function(){
-        var li = this.parentElement;
+        var article = this.parentElement;
+        var li = article.parentElement;
         var ol = li.parentElement;
 
         var url = "/post/" + this.value;
