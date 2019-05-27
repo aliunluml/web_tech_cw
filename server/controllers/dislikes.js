@@ -8,7 +8,6 @@ module.exports = {
         postId: req.params.id,
       })
       .then(dislike => {
-        req.session.user.dislikes.push(dislike);
         next();
       })
       .catch(error => {

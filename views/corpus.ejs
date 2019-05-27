@@ -14,16 +14,16 @@
         <ol>
           <% user.posts.forEach((post) => { %>
           <li>
-            <article>
+            <article data-liked="<%= post.liked %>" data-disliked="<%= post.disliked %>">
               <p><%= post.content %></p>
               <% if(user.username===username){ %>
                 <button class="delete_button" type="button" value="<%= post.id %>">Delete</button>
               <% } else { %>
-                <button class="submit_button" type="button" value="<%= post.id %>">Like</button>
-                <button class="submit_button" type="button" value="<%= post.id %>">Dislike</button>
+                <button class="submit_button like" type="button" value="<%= post.id %>">Like</button>
+                <button class="submit_button dislike" type="button" value="<%= post.id %>">Dislike</button>
               <% } %>
-              <p>Likes: <%= post.likeCount %></p>
-              <p>Dislikes: <%= post.dislikeCount %></p>
+              <p>Likes: <span><%= post.likeCount %></span></p>
+              <p>Dislikes: <span><%= post.dislikeCount %></span></p>
             </article>
           </li>
           <% }); %>

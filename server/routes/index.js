@@ -132,7 +132,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   app.get('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
-  }, likesController.create, (req, res, next) => {
+  }, likesController.create, postsController.retrieve, (req, res, next) => {
+    req.session.user.likes.push(req.params.post);
     res.sendStatus(201);
   });
   app.delete('/post/:id/like', checkLogin, function(req, res, next){
@@ -142,7 +143,8 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   });
   app.get('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
-  }, dislikesController.create, (req, res, next) => {
+  }, dislikesController.create, postsController.retrieve, (req, res, next) => {
+    req.session.user.dislikes.push(req.params.post);
     res.sendStatus(201);
   });
   app.delete('/post/:id/dislike', checkLogin, function(req, res, next){
@@ -157,19 +159,12 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.use('/post', checkLogin, loginRedirect);
 
 
-  app.get('/corpus', checkLogin, usersController.list, (req, res, next) => {
-    res.render('corpus.ejs',{
-      username: req.session.user.username,
-      logged:"true",
-      corpusFeed: req.session.corpusFeed,
-    });
-  });
-  app.use('/corpus', checkLogin, loginRedirect);
-
-  function prepare(posts){
+  function prepare(req, posts){
     var sentPosts = [];
     posts.forEach(post=>{
       var sentPost = {
+        liked: post.likedBys.includes(req.session.user).toString(),
+        disliked: post.dislikedBys.includes(req.session.user).toString(),
         id: post.id,
         content: post.content,
         likeCount: (post.likedBys===undefined) ? "0" : post.likedBys.length.toString(),
@@ -179,6 +174,18 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
     });
     return sentPosts;
   }
+
+
+  app.get('/corpus', checkLogin, function(req, res, next){
+    usersController.list(req, res, next, prepare);
+  }, (req, res, next) => {
+    res.render('corpus.ejs',{
+      username: req.session.user.username,
+      logged:"true",
+      corpusFeed: req.session.corpusFeed,
+    });
+  });
+  app.use('/corpus', checkLogin, loginRedirect);
 
 
   app.get('/profile', checkLogin, (req, res) => {

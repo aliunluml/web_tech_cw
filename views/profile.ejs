@@ -41,8 +41,10 @@
       <li>
         <article>
           <p><%= post.content %></p>
-          <p>Likes: <%= post.likeCount %></p>
-          <p>Dislikes: <%= post.dislikeCount %></p>
+          <button class="submit_button like" type="button" value="<%= post.id %>">Like</button>
+          <button class="submit_button dislike" type="button" value="<%= post.id %>">Dislike</button>
+          <p>Likes: <span><%= post.likeCount %></span></p>
+          <p>Dislikes: <span><%= post.dislikeCount %></span></p>
         </article>
       </li>
       <% }); %>
@@ -57,8 +59,10 @@
       <li>
         <article>
           <p><%= post.content %></p>
-          <p>Likes: <%= post.likeCount %></p>
-          <p>Dislikes: <%= post.dislikeCount %></p>
+          <button class="submit_button like" type="button" value="<%= post.id %>">Like</button>
+          <button class="submit_button dislike" type="button" value="<%= post.id %>">Dislike</button>
+          <p>Likes: <span><%= post.likeCount %></span></p>
+          <p>Dislikes: <span><%= post.dislikeCount %></span></p>
         </article>
       </li>
       <% }); %>

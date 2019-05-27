@@ -8,7 +8,6 @@ module.exports = {
         postId: req.params.id,
       })
       .then(like => {
-        req.session.user.likes.push(like);
         next();
       })
       .catch(error => {

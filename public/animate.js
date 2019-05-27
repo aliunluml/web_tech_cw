@@ -85,4 +85,56 @@ document.addEventListener('DOMContentLoaded', () => {
     });
   }
 
+  var likebtns = document.querySelectorAll("article > .submit_button.like");
+  if (likebtns) {
+    for (var i = 0; i < likebtns.length; i++) {
+      var article = likebtns[i].parentNode;
+      var likeP = article.childNodes[3];
+      var likeSpan = likeP.firstChild;
+      if (article.dataset.liked==="false") {
+
+        likebtns[i].onclick = function(){
+          var count = parseInt(likeSpan.innerHTML);
+
+          var url = "/post/" + this.value + "/like";
+          var request = new XMLHttpRequest();
+          request.open('GET', url);
+          request.responseType = 'text';
+
+          request.onload = function() {
+            if (request.status===201) {
+              count++;
+              likeSpan.innerHTML = count;
+              article.dataset.liked = "true";
+            }
+          };
+
+          request.send();
+        };
+
+      } else {
+
+        likebtns[i].onclick = function(){
+          var count = parseInt(likeSpan.innerHTML);
+
+          var url = "/post/" + this.value + "/like";
+          var request = new XMLHttpRequest();
+          request.open('DELETE', url);
+          request.responseType = 'text';
+
+          request.onload = function() {
+            if (request.status===204) {
+              count--;
+              likeSpan.innerHTML = count;
+              article.dataset.liked = "false";
+            }
+          };
+
+          request.send();
+
+        };
+      }
+    }
+  }
+
 });

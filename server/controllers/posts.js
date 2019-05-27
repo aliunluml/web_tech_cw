@@ -29,19 +29,29 @@ module.exports = {
   //     .then(posts => res.status(200).send(posts))
   //     .catch(error => res.status(400).send(error));
   // },
-  // retrieve(req, res) {
-  //   return Post
-  //     .findByPk(req.params.postId)
-  //     .then(post => {
-  //       if (!post) {
-  //         return res.status(404).send({
-  //           message: 'Post Not Found',
-  //         });
-  //       }
-  //       return res.status(200).send(post);
-  //     })
-  //     .catch(error => res.status(400).send(error));
-  // },
+  retrieve(req, res, next) {
+    return Post
+      .findByPk(req.params.id)
+      .then(post => {
+        if (!post) {
+          res.status(404);
+          return res.render('error.ejs',{
+            logged:"true",
+            errorMessage: "404 Not found"
+          });
+        }
+        req.params.post = post;
+        next();
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
+  },
   // update(req, res) {
   //   return Post
   //     .findByPk(req.params.postId)
