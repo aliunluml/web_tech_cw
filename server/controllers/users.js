@@ -41,9 +41,6 @@ module.exports = {
           next();
         }
         else {
-          //No feedback is given to the user at the moment.
-          //There is also no differentiation between email & username checks
-          //We may split this eligible() as emailCheck() & usernameCheck()
           invalidUsername = false;
           invalidEmail = false;
           for (var i = 0; i < users.length; i++) {
@@ -124,7 +121,7 @@ module.exports = {
         });
       });
   },
-  list(req, res, next, prepare) {
+  list(req, res, next) {
     return User
       .findAll({
         include: [{
@@ -134,15 +131,53 @@ module.exports = {
         }],
       })
       .then(users => {
-        buffer = [];
-        users.forEach(user => {
-          var item = {
-            username: user.username,
-            posts: prepare(req, user.posts),
-          };
-          buffer.push(item);
+        req.params.users = users;
+        next();
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          username: req.session.user.username,
+          logged:"true",
+          errorMessage: "400 Bad request"
         });
-        req.session.corpusFeed = buffer;
+      });
+  },
+  fetchLikes(req, res, next) {
+    return User
+      .findByPk(req.session.user.id,{
+        include: [{
+          model: Post,
+          as: 'likes',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
+        }],
+      })
+      .then(user => {
+        req.session.user.likes = user.likes;
+        next();
+      })
+      .catch(error => {
+        console.log(error);
+        res.status(400);
+        res.render('error.ejs',{
+          username: req.session.user.username,
+          logged:"true",
+          errorMessage: "400 Bad request"
+        });
+      });
+  },
+  fetchDislikes(req, res, next) {
+    return User
+      .findByPk(req.session.user.id,{
+        include: [{
+          model: Post,
+          as: 'dislikes',
+          include: [{model: User, as: 'likedBys'}, {model: User, as: 'dislikedBys'}]
+        }],
+      })
+      .then(user => {
+        req.session.user.dislikes = user.dislikes;
         next();
       })
       .catch(error => {

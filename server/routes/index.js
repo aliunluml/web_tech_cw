@@ -137,32 +137,26 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
 
   app.get('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
-  }, likesController.create, postsController.retrieve, (req, res, next) => {
-    req.params.post.likedBys = (req.params.post.likedBys || []).push(req.session.user);
-    req.session.user.likes = (req.session.user.likes || []).push(req.params.post);
-    console.log(req.session.user.likes);
+  }, likesController.create, usersController.fetchLikes, (req, res, next) => {
     res.sendStatus(201);
   });
 
   app.delete('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
-  }, checkLikeOwnership, likesController.destroy, (req, res, next) => {
-    console.log(req.session.user.likes);
+  }, checkLikeOwnership, likesController.destroy, usersController.fetchLikes, (req, res, next) => {
     res.sendStatus(204);
   });
 
 
   app.get('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
-  }, dislikesController.create, postsController.retrieve, (req, res, next) => {
-    req.params.post.dislikedBys = (req.params.post.dislikedBys || []).push(req.session.user);
-    req.session.user.dislikes = (req.session.user.dislikes || []).push(req.params.post);
+  }, dislikesController.create, usersController.fetchDislikes, (req, res, next) => {
     res.sendStatus(201);
   });
 
   app.delete('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
-  }, checkDislikeOwnership, dislikesController.destroy, (req, res, next) => {
+  }, checkDislikeOwnership, dislikesController.destroy, usersController.fetchDislikes, (req, res, next) => {
     res.sendStatus(204);
   });
 
@@ -172,20 +166,42 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.use('/post', checkLogin, loginRedirect);
 
 
-  function prepare(req, posts){
+  function prepare(req, posts, method="findAll"){
+    var hasUser;
+
+    if (method==="findByPk") {
+      hasUser = user => {
+        if (user) {
+          return user.id===req.session.user.id;
+        } else {
+          return false;
+        }
+      };
+    } else {
+      hasUser = user => {
+        if (user) {
+          return user.dataValues.id===req.session.user.id;
+        } else {
+          return false;
+        }
+      };
+    }
+
     var sentPosts = [];
     console.log(posts);
     if (posts) {
       for (var i = 0; i < posts.length; i++) {
+        console.log(posts[i].likedBys);
       // posts.forEach(post=>{
         var sentPost = {
-          liked: (posts[i].likedBys || []).includes(req.session.user).toString(),
-          disliked: (posts[i].dislikedBys || []).includes(req.session.user).toString(),
+          liked: (posts[i].likedBys.filter(hasUser).length!==0).toString(),
+          disliked: (posts[i].dislikedBys.filter(hasUser).length!==0).toString(),
           id: posts[i].id,
           content: posts[i].content,
-          likeCount: (posts[i].likedBys===undefined) ? "0" : posts[i].likedBys.length.toString(),
-          dislikeCount: (posts[i].dislikedBys===undefined) ? "0" : posts[i].dislikedBys.length.toString(),
+          likeCount: posts[i].likedBys.length.toString(),
+          dislikeCount: posts[i].dislikedBys.length.toString(),
         };
+        console.log(sentPost);
         sentPosts.push(sentPost);
       // });
       }
@@ -194,23 +210,29 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   }
 
 
-  app.get('/corpus', checkLogin, function(req, res, next){
-    usersController.list(req, res, next, prepare);
-  }, (req, res, next) => {
+  app.get('/corpus', checkLogin, usersController.list, (req, res, next) => {
+    buffer = [];
+    req.params.users.forEach(user => {
+      var item = {
+        username: user.username,
+        posts: prepare(req, user.posts, "findAll"),
+      };
+      buffer.push(item);
+    });
     res.render('corpus.ejs',{
       username: req.session.user.username,
       logged:"true",
-      corpusFeed: req.session.corpusFeed,
+      corpusFeed: buffer,
     });
   });
   app.use('/corpus', checkLogin, loginRedirect);
 
 
   app.get('/profile', checkLogin, (req, res) => {
-    console.log(req.session.user.likes);
-    var posts = prepare(req,req.session.user.posts);
-    var likedPosts = prepare(req,req.session.user.likes);
-    var dislikedPosts = prepare(req,req.session.user.dislikes);
+    // console.log(req.session.user.likes);
+    var posts = prepare(req,req.session.user.posts, "findByPk");
+    var likedPosts = prepare(req,req.session.user.likes, "findByPk");
+    var dislikedPosts = prepare(req,req.session.user.dislikes, "findByPk");
 
     res.render('profile.ejs',{
       username: req.session.user.username,

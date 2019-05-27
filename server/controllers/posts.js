@@ -1,4 +1,5 @@
 const Post = require('../models').Post;
+const User = require('../models').User;
 
 module.exports = {
   create(req, res, next) {
@@ -30,31 +31,39 @@ module.exports = {
   //     .then(posts => res.status(200).send(posts))
   //     .catch(error => res.status(400).send(error));
   // },
-  retrieve(req, res, next) {
-    return Post
-      .findByPk(req.params.id)
-      .then(post => {
-        if (!post) {
-          res.status(404);
-          return res.render('error.ejs',{
-            username: req.session.user.username,
-            logged:"true",
-            errorMessage: "404 Not found"
-          });
-        }
-        req.params.post = post;
-        next();
-      })
-      .catch(error => {
-        console.log(error);
-        res.status(400);
-        res.render('error.ejs',{
-          username: req.session.user.username,
-          logged:"true",
-          errorMessage: "400 Bad request"
-        });
-      });
-  },
+  // retrieve(req, res, next) {
+  //   return Post
+  //     .findByPk(req.params.id, {
+  //       include: [{
+  //         model: User,
+  //         as: 'likedBys',
+  //       },{
+  //         model: User,
+  //         as: 'dislikedBys',
+  //       }],
+  //     })
+  //     .then(post => {
+  //       if (!post) {
+  //         res.status(404);
+  //         return res.render('error.ejs',{
+  //           username: req.session.user.username,
+  //           logged:"true",
+  //           errorMessage: "404 Not found"
+  //         });
+  //       }
+  //       req.params.post = post;
+  //       next();
+  //     })
+  //     .catch(error => {
+  //       console.log(error);
+  //       res.status(400);
+  //       res.render('error.ejs',{
+  //         username: req.session.user.username,
+  //         logged:"true",
+  //         errorMessage: "400 Bad request"
+  //       });
+  //     });
+  // },
   // update(req, res) {
   //   return Post
   //     .findByPk(req.params.postId)
