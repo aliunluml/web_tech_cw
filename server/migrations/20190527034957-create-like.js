@@ -14,7 +14,8 @@ module.exports = {
           model: 'Users',
           key: 'id',
           as: 'userId',
-        }
+        },
+        unique: 'unique_like',
       },
       postId: {
         type: Sequelize.INTEGER,
@@ -22,7 +23,8 @@ module.exports = {
           model: 'Posts',
           key: 'id',
           as: 'postId',
-        }
+        },
+        unique: 'unique_like',
       },
       createdAt: {
         allowNull: false,
@@ -31,6 +33,12 @@ module.exports = {
       updatedAt: {
         allowNull: false,
         type: Sequelize.DATE
+      }
+    }, {
+      uniqueKeys: {
+        unique_like: {
+            fields: ['userId', 'postId']
+        }
       }
     });
   },

@@ -28,6 +28,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
     else{
       res.status(403);
       res.render('error.ejs',{
+        username: req.session.user.username,
         logged:"true",
         errorMessage: "403 Forbidden"
       });
@@ -86,6 +87,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
     else{
       res.status(403);
       res.render('error.ejs',{
+        username: req.session.user.username,
         logged:"true",
         errorMessage: "403 Forbidden"
       });
@@ -136,6 +138,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.get('/post/:id/like', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, likesController.create, postsController.retrieve, (req, res, next) => {
+    req.params.post.likedBys.push(req.session.user);
     req.session.user.likes.push(req.params.post);
     console.log(req.session.user.likes);
     res.sendStatus(201);
@@ -152,6 +155,7 @@ module.exports = (app, checkLogin, loginRedirect, continueWithNoLogin) => {
   app.get('/post/:id/dislike', checkLogin, function(req, res, next){
     checkPostOwnership(req, res, next, true);
   }, dislikesController.create, postsController.retrieve, (req, res, next) => {
+    req.params.post.dislikedBys.push(req.session.user);
     req.session.user.dislikes.push(req.params.post);
     res.sendStatus(201);
   });

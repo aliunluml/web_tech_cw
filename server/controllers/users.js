@@ -149,6 +149,7 @@ module.exports = {
         console.log(error);
         res.status(400);
         res.render('error.ejs',{
+          username: req.session.user.username,
           logged:"true",
           errorMessage: "400 Bad request"
         });
@@ -206,6 +207,7 @@ module.exports = {
         if (!user) {
           res.status(404);
           return res.render('error.ejs',{
+            username: req.session.user.username,
             logged:"true",
             errorMessage: "404 Not found"
           });
@@ -219,6 +221,7 @@ module.exports = {
             console.log(error);
             res.status(400);
             res.render('error.ejs',{
+              username: req.session.user.username,
               logged:"true",
               errorMessage: "400 Bad request"
             });
@@ -228,6 +231,7 @@ module.exports = {
         console.log(error);
         res.status(400);
         res.render('error.ejs',{
+          username: req.session.user.username,
           logged:"true",
           errorMessage: "400 Bad request"
         });
